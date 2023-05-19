@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Blob Slayer</string>
+    <string name="config">Config.</string>
+    <string name="play">Play</string>
+    <string name="creditos">Credits</string>
+    <string name="vibracion">Vibration</string>
+    <string name="score">Score</string>
+    <string name="gameOver">Game Over</string>
+    <string name="idea">Idea: Gabriel Costas Martinez</string>
+    <string name="desarrollo">dvelopment: Gabriel Costas Martinez</string>
+    <string name="assets">assets: opengameart.org</string>
+    <string name="idioma">Language</string>
+
+</resources>

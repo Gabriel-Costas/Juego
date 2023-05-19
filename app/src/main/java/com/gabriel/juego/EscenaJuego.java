@@ -1,0 +1,480 @@
+package com.gabriel.juego;
+
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.hardware.SensorEvent;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Vibrator;
+import android.util.Log;
+import android.view.MotionEvent;
+
+import java.util.ArrayList;
+import java.util.Random;
+
+public class EscenaJuego extends Escena {
+    int numEscena = 1;
+    Bitmap btnAtacar, btnPocion, btnNoPocion, btnIzda, btnDer, spriteMC;
+    Boton btnAtk, btnPot, btnR, btnL;
+    Paint boton;
+    Personaje mc;
+    int anp, alp;
+    static boolean lado;
+    static int combo = 0;
+    Fondo capa1, capa2, capa3, capa4;
+    public SoundPool efectos;
+    public Integer sonidoWoosh;
+    ArrayList<Enemigo> enemigo = new ArrayList<>();
+    long tiempoGenera = 0;
+    int tickGenera = 2000;
+    Vibrator vibrator;
+    int tiempoVibra = 100;
+    boolean nuevoJuego = true;
+    boolean jugando = true;
+    ArrayList<Items> items = new ArrayList<>();
+    Paint fade, fadeOut;
+    long tFade = 0;
+    int tickFade = 20;
+    int veloFade = -5;
+    boolean prueba = false;
+    public AudioManager audioManager;
+    private Bitmap bitmapFondo, fondoMedio, fondoCerca, fondoLuz; // Imagen de fondo
+    // TODO: 16/5/23
+    Bitmap[] enemigo1;
+    Bitmap[] enemigo2;
+    Bitmap[] enemigo3;
+    Bitmap[] enemigo4;
+    Bitmap[] boss;
+
+    public EscenaJuego(Context context, int numEscena, int anp, int alp) {
+        super(context, anp, alp, numEscena);
+        this.numEscena = numEscena;
+        this.anp = anp;
+        this.alp = alp;
+        vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+        mc = new Personaje(context,/*spriteMC,*/ anp, alp,anp / 6, alp / 4 * 2);
+
+        bitmapFondo = BitmapFactory.decodeResource(context.getResources(), R.drawable.fondo);
+        fondoMedio = BitmapFactory.decodeResource(context.getResources(), R.drawable.fondo_medio);
+        fondoCerca = BitmapFactory.decodeResource(context.getResources(), R.drawable.fondo_cerca);
+        fondoLuz = BitmapFactory.decodeResource(context.getResources(), R.drawable.fondo_luz);
+        bitmapFondo = Bitmap.createScaledBitmap(bitmapFondo, anp, alp, true);
+        fondoMedio = Bitmap.createScaledBitmap(fondoMedio, anp, alp, true);
+        fondoCerca = Bitmap.createScaledBitmap(fondoCerca, anp, alp, true);
+        fondoLuz = Bitmap.createScaledBitmap(fondoLuz, anp, alp, true);
+        capa1 = new Fondo(bitmapFondo, 0, anp / 180, alp);
+        capa2 = new Fondo(fondoMedio, 0, anp / 80, alp);
+        capa3 = new Fondo(fondoCerca, 0, anp / 60, alp);
+
+        capa4 = new Fondo(fondoLuz, 0, anp / 50, alp);
+
+
+        btnAtacar = getAsset("Botones/Attack.png");
+        btnAtacar = Bitmap.createScaledBitmap(btnAtacar, btnAtacar.getWidth(), btnAtacar.getHeight(), true);
+        btnAtk = new Boton("Atacar", btnAtacar, (anp / 10) * 9, (alp / 4) * 3);
+        btnAtk.setEnabled = false;
+
+        btnPocion = getAsset("Botones/Potion.png");
+        btnPocion = Bitmap.createScaledBitmap(btnPocion, btnPocion.getWidth(), btnPocion.getHeight(), true);
+        btnPot = new Boton("Pocion", btnPocion, (anp / 10) * 8, (alp / 4) * 3);
+        btnPot.setEnabled = false;
+
+        btnNoPocion = getAsset("Botones/PotionUsed.png");
+        btnNoPocion = Bitmap.createScaledBitmap(btnNoPocion, btnNoPocion.getWidth(), btnNoPocion.getHeight(), true);
+
+        btnIzda = getAsset("Botones/arrow_left.png");
+        btnIzda = Bitmap.createScaledBitmap(btnIzda, btnIzda.getWidth() * 2, btnIzda.getHeight() * 2, true);
+        btnL = new Boton("Izquierda", btnIzda, (anp / 10) * 1, (alp / 4) * 3);
+        btnL.setEnabled = false;
+
+        btnDer = getAsset("Botones/arrow_right.png");
+        btnDer = Bitmap.createScaledBitmap(btnDer, btnDer.getWidth() * 2, btnDer.getHeight() * 2, true);
+        btnR = new Boton("Izquierda", btnDer, (anp / 10) * 2, (alp / 4) * 3);
+        btnR.setEnabled = false;
+
+        fade = new Paint();
+        fade.setColor(Color.BLACK);
+        fade.setAlpha(255);
+
+        fadeOut = new Paint();
+        fadeOut.setColor(Color.RED);
+        fadeOut.setAlpha(0);
+
+        audioManager=(AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        enemigo1 = new Bitmap[2];
+        Bitmap enem1Mov;
+        for (int i = 0; i < 2; i++) {
+            enem1Mov = getAsset("enemigo/blob.png");
+            enem1Mov = Bitmap.createBitmap(enem1Mov, (enem1Mov.getWidth() / 2) * i, 0, (enem1Mov.getWidth() / 2), enem1Mov.getHeight());
+            enemigo1[i] = Bitmap.createScaledBitmap(enem1Mov, enem1Mov.getWidth() / 2, enem1Mov.getHeight() / 2, true);
+        }
+
+        Bitmap enem2Mov1;
+        enemigo2 = new Bitmap[5];
+        for (int i = 0; i < 5; i++) {
+            enem2Mov1 = getAsset("enemigo/horror walk.png");
+            enem2Mov1 = Bitmap.createBitmap(enem2Mov1, (enem2Mov1.getWidth() / 5) * i, 0, enem2Mov1.getWidth() / 5, enem2Mov1.getHeight());
+            enemigo2[i] = Bitmap.createScaledBitmap(enem2Mov1, enem2Mov1.getWidth() + anchoPantalla / 3, enem2Mov1.getHeight() + altoPantalla / 3, true);
+
+        }
+
+        Bitmap enem3Mov;
+        enemigo3 = new Bitmap[3];
+        for (int i = 0; i < 3; i++) {
+            enem3Mov = getAsset("enemigo/zomb" + (i + 1) + ".png");
+            enemigo3[i] = Bitmap.createScaledBitmap(enem3Mov, enem3Mov.getWidth() * 5, enem3Mov.getHeight() * 5, true);
+        }
+//
+        Bitmap enem4Mov;
+        enemigo4 = new Bitmap[3];
+        for (int i = 0; i < 3; i++) {
+            enem4Mov = getAsset("enemigo/beetle" + (i + 1) + ".png");
+            enemigo4[i] = Bitmap.createScaledBitmap(enem4Mov, enem4Mov.getWidth() * 5, enem4Mov.getHeight() * 5, true);
+        }
+        Bitmap bossMov;
+        boss=new Bitmap[3];
+        for (int i = 0; i < 3; i++) {
+            bossMov=getAsset("enemigo/archon"+(i+1)+".png");
+            boss[i]=Bitmap.createScaledBitmap(bossMov, bossMov.getWidth()*7,bossMov.getHeight()*7,true);
+        }
+
+        if ((android.os.Build.VERSION.SDK_INT) >= 21) {
+            SoundPool.Builder spb=new SoundPool.Builder();
+            spb.setAudioAttributes(new AudioAttributes.Builder().setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION).build());
+            spb.setMaxStreams(5);
+            this.efectos=spb.build();
+        } else {
+            this.efectos=new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+        }
+        sonidoWoosh=efectos.load(context, R.raw.swoshhh,1);
+
+
+    }
+
+    public void juegoReset() {
+        spriteMC = BitmapFactory.decodeResource(context.getResources(), R.drawable.personaje_idle1);
+        spriteMC = Bitmap.createScaledBitmap(spriteMC, spriteMC.getWidth() / 3, spriteMC.getHeight() / 3, true);
+        mc = new Personaje(context,/*spriteMC*/ anchoPantalla, altoPantalla,anp / 6, alp / 4 * 2);
+//        recordNombre = "";
+        enemigo.clear();
+
+    }
+
+    public void dibujar(Canvas c) {
+        c.drawColor(Color.RED);
+        capa1.dibujar(c);
+        capa2.dibujar(c);
+        capa3.dibujar(c);
+        capa4.dibujar(c);
+        mc.dibujar(c);
+        for (Enemigo e : enemigo) {
+            e.dibujar(c);
+        }
+        btnAtk.dibujar(c);
+        btnPot.dibujar(c);
+        btnL.dibujar(c);
+        btnR.dibujar(c);
+
+        for (Items it : items) {
+            it.dibujar(c);
+        }
+        super.dibujar(c);
+
+    }
+
+    public void actualizarFisica() {
+        if (nuevoJuego) {
+            if (jugando) {
+
+                if (capa1 != null) capa1.mover();
+                if (capa2 != null) capa2.mover();
+                if (capa3 != null) capa3.mover();
+                if (capa4 != null) capa4.mover();
+
+                if (items.size() > 0) {
+                    for (int i = items.size() - 1; i >= 0; i--) {
+                        items.get(i).mover();
+                        if (mc.hitbox.intersect(items.get(i).hitbox)) {
+                            mc.cojePocion();
+                            items.remove(items.get(i));
+                        }
+                    }
+                }
+
+                mc.actualizaFisica();
+
+                try {
+                    if (enemigo.size() > 0) {
+                        for (int i = enemigo.size() - 1; i >= 0; i--) {
+                            enemigo.get(i).actualizaFisica();
+                            enemigo.get(i).mover(mc.hbCentro, capa4.veloDibujo);
+                            if (enemigo.get(i).ataque(mc.hitbox)) {
+                                vibrator.vibrate(tiempoVibra * 2);
+                                mc.recibeDaño(enemigo.get(i).ataque);
+                                if (mc.vidaActual <= 0) {
+                                    //todo morir
+                                    vibrator.vibrate(tiempoVibra * 10);
+                                    jugando = false;
+                                    mc.vivo = false;
+                                }
+                            }
+                        }
+                    }
+                } catch (IndexOutOfBoundsException e) {
+
+                }
+
+                spawnEnemigo(enemigo.size());
+            } else {
+                if (!jugando && mc.vivo) {
+                    if (System.currentTimeMillis() - tFade >= tickFade) {
+                        fade.setAlpha(fade.getAlpha() + veloFade);
+                        tFade = System.currentTimeMillis();
+                    }
+                    if (fade.getAlpha() < 10) {
+                        jugando = true;
+                    }
+                } else {
+                    if (System.currentTimeMillis() - tFade >= tickFade && fadeOut.getAlpha() < 255) {
+
+                        fadeOut.setAlpha(fadeOut.getAlpha() - veloFade);
+
+                        tFade = System.currentTimeMillis();
+
+                    } else {
+
+                        prueba = true;
+                    }
+                }
+            }
+        }
+
+
+    }
+/*
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+        float luz = sensorEvent.values[0];
+        Log.i("luz", "luz: " + String.valueOf(luz));
+        for (Enemigo e : enemigo) {
+            if (luz < 30) {
+                e.ataque = e.ataqueBase + 2;
+            } else {
+                if (luz < 100) {
+                    e.ataque = e.ataqueBase + 1;
+                } else {
+                    if (luz < 300) {
+                        e.ataque = e.ataqueBase;
+                    } else {
+                        e.ataque = e.ataqueBase - 1;
+                    }
+                }
+            }
+        }
+    }
+*/
+    int onTouchEvent(MotionEvent event) {
+        int x = (int) event.getX();
+        int y = (int) event.getY();
+      //  int aux = super.onTouchEvent(event);
+
+      //  if (aux != this.numEscena && aux != -1) return aux;
+
+
+//        Log.i("arranco", "!pulso");
+        switch (event.getAction()) {
+
+            case MotionEvent.ACTION_DOWN:
+//                Log.i("atacamos", "!pulso 22222 " + btnAtk.hitbox.contains(x, y) + " " + mc.ataca);
+                if (btnAtk.hitbox.contains(x, y) && !mc.ataca) {
+                    combo++;
+                    Log.i("atacamos", "!pulso 22222 atacooo");
+
+                    Log.i("atacamos", "ataque: runcycle");
+//Sonido
+                    Log.i("atacamos", efectos.toString());
+                    int v = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                    efectos.play(sonidoWoosh, v, v, 1, 0, 1);
+                    switch (combo) {
+                        case 1:
+                            if (!lado) {
+                                mc.ataque( 1,false);
+                            } else {
+                                mc.ataque(1, true);
+                            }
+
+                            break;
+
+                        case 2:
+                            if (!lado) {
+                                mc.ataque( 2,false);
+                            } else {
+                                mc.ataque( 2,true);
+                            }
+                            break;
+
+                        case 3:
+                            if (!lado) {
+                                mc.ataque( 3,false);
+                            } else {
+                                mc.ataque( 3,true);
+                            }
+                            combo = 0;
+                            break;
+                    }
+
+                    /* todo
+                    for (int i = enemigo.size() - 1; i >= 0; i--) {
+                        if (mc.golpea(enemigo.get(i).hitbox)) {
+                            vibrator.vibrate(tiempoVibra);
+                            boolean muere = enemigo.get(i).recibeDaño();
+                            if (muere) {
+                                mc.pts += enemigo.get(i).pts;
+                                mc.bossCheck += enemigo.get(i).pts;
+                                if (enemigo.get(i).drop) {
+                                    items.add(new Items(enemigo.get(i).Px, pocionDrop));
+                                }
+                                enemigo.remove(i);
+                            }
+                        }
+                    }
+                    */
+
+                } else {
+                    if (btnPot.hitbox.contains(x, y)) {
+                        mc.bebePocion();
+                        if (mc.pociones == 0) {
+                            btnPot.imgBoton = btnNoPocion;
+                        } else {
+                            btnPot.imgBoton = btnPocion;
+                        }
+                    } else {
+                        if (btnL.hitbox.contains(x, y)) {
+                            Log.i("muevo", "onTouchEvent: ia");
+                            capa1.mueveDcha();
+                            capa1.arranco();
+
+                            capa2.mueveDcha();
+                            capa2.arranco();
+
+                            capa3.mueveDcha();
+                            capa3.arranco();
+
+                            capa4.mueveDcha();
+                            capa4.arranco();
+
+                            for (Items it : items) {
+                                it.arranco();
+                                it.mueveDcha();
+//                                it.mover();
+                            }
+
+                            mc.mueveIz();
+                            lado = false;
+                            combo = 0;
+                        } else {
+                            if (btnR.hitbox.contains(x, y)) {
+                                Log.i("muevo", "onTouchEvent: de");
+                                capa1.mueveIz();
+                                capa1.arranco();
+
+
+                                capa2.mueveIz();
+                                capa3.mueveIz();
+                                capa4.mueveIz();
+                                capa2.arranco();
+
+                                capa3.arranco();
+                                capa4.arranco();
+
+                                for (Items it : items) {
+                                    it.arranco();
+                                    it.mueveIz();
+                                }
+
+                                mc.mueveDcha();
+                                lado = true;
+                                combo = 0;
+                            } else {
+                              /* todo
+                                if (btnCont.hitbox.contains(x, y) && pantallaJuego == 1) {
+                                    vibrator.vibrate(tiempoVibra);
+                                    pantallaJuego = 2;
+                                }*/
+                            }
+                        }
+
+                    }
+                }
+                /*
+                // todo
+
+                for (int i = 0; i < teclado.botones.size(); i++) {
+                    if (teclado.botones.get(i).hitbox.contains(x, y) && pantallaJuego == 2) {
+                        vibrator.vibrate(tiempoVibra);
+                        recordNombre += teclado.botones.get(i).nombre;
+                    }
+                }
+                */
+                break;
+            case MotionEvent.ACTION_UP:
+                Log.i("Paro", "!paro 22222");
+                capa1.paro();
+                capa2.paro();
+                capa3.paro();
+                capa4.paro();
+                for (Items it : items) {
+                    it.paro();
+                }
+                mc.paro( lado);
+
+
+                break;
+                //return this.numEscena;
+        }
+         return this.numEscena;
+    }
+
+    public void spawnEnemigo ( int totalVivos){
+        if (enemigo.size() < 10) {
+            int spawn = new Random().nextInt(101);
+            if (spawn < 50) {
+            } else {
+
+               // todo
+                if (System.currentTimeMillis() - tiempoGenera > tickGenera) {
+                    if (spawn < 75) {
+                        enemigo.add(new Enemigo1(enemigo1));
+                    } else {
+                        if (spawn < 85) {
+                            enemigo.add(new Enemigo3(enemigo4));
+                        } else {
+                            if (spawn < 95) {
+                                enemigo.add(new Enemigo4(enemigo3));
+                            } else {
+                                enemigo.add(new Enemigo2(enemigo2));
+                            }
+                        }
+                    }
+                    tiempoGenera = System.currentTimeMillis();
+                }
+
+            }
+        }
+      /*
+      /*
+       //  todo
+        if (mc.bossCheck >= 1000) {
+            enemigo.add(new Boss(boss));
+            mc.bossCheck = 0;
+        }
+        */
+    }
+}
