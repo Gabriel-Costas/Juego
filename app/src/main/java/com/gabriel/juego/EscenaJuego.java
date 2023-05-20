@@ -7,7 +7,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.hardware.Sensor;
 import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.SoundPool;
@@ -18,7 +21,9 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class EscenaJuego extends Escena {
+public class EscenaJuego extends Escena implements SensorEventListener {
+    SensorManager sensorManager;
+    Sensor sensorLuz;
     int numEscena = 1;
     Bitmap btnAtacar, btnPocion, btnNoPocion, btnIzda, btnDer, spriteMC;
     Boton btnAtk, btnPot, btnR, btnL;
@@ -54,6 +59,9 @@ public class EscenaJuego extends Escena {
 
     public EscenaJuego(Context context, int numEscena, int anp, int alp) {
         super(context, anp, alp, numEscena);
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        sensorLuz = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+
         this.numEscena = numEscena;
         this.anp = anp;
         this.alp = alp;
@@ -258,7 +266,23 @@ public class EscenaJuego extends Escena {
 
 
     }
-/*
+
+    @Override
+    public void onEscenaCreated() {
+        Log.i("chocolate", "pasacreated");
+        if (sensorLuz != null) {
+            sensorManager.registerListener(this, sensorLuz, SensorManager.SENSOR_DELAY_GAME);
+        }
+    }
+
+    @Override
+    public void onEscenaDestroyed() {
+        Log.i("chocolate", "pasaDestroyed");
+        if (sensorLuz != null) {
+            sensorManager.unregisterListener(this);
+        }
+    }
+
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         float luz = sensorEvent.values[0];
@@ -279,7 +303,11 @@ public class EscenaJuego extends Escena {
             }
         }
     }
-*/
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
     int onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();

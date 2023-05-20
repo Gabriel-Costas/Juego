@@ -32,91 +32,90 @@ import java.security.spec.ECField;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Random;
-
+// TODO sensor luz
+// TODO MOVER ESCENAS
 public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Callback , SensorEventListener {
 
     Vibrator vibrator;
 
     Escena escenaActual;
-    public MediaPlayer mediaPlayer;
-    public AudioManager audioManager;
+    // public MediaPlayer mediaPlayer;
+    // public AudioManager audioManager;
    // MenuAyuda ma;
     private SurfaceHolder surfaceHolder; // Interfaz abstracta para manejar la superficie de dibujado
     private Context context; // Contexto de la aplicación
 
 
-    private Bitmap[] enemigo1, enemigo2, enemigo3, enemigo4, boss; //Enemigos
-    private Bitmap enem1Mov, enem2Mov1, enem3Mov, enem4Mov, bossMov;
-    private Bitmap mcRun1; //run cycle
-    private Bitmap mca1, fondoOpciones, home, fondoMenu, imgCreditos;
-    boolean prueba = false;
-    private Bitmap btnAtacar, btnPocion, btnNoPocion, btnIzda, btnDer, vida, pocionDrop, btnContinuar, btnBorrar, btnConfirmar, fondoMuerte, playImg, chkbImg0, chkbImg1, panelImg, config, esp, eng, imgHelp;
+//    private Bitmap[] enemigo1, enemigo2, enemigo3, enemigo4, boss; //Enemigos
+//    private Bitmap enem1Mov, enem2Mov1, enem3Mov, enem4Mov, bossMov;
+//    private Bitmap mcRun1; //run cycle
+//    private Bitmap mca1, fondoOpciones, home, fondoMenu, imgCreditos;
+    // boolean prueba = false;
+    // private Bitmap btnAtacar, btnPocion, btnNoPocion, btnIzda, btnDer, vida, pocionDrop, btnContinuar, btnBorrar, btnConfirmar, fondoMuerte, playImg, chkbImg0, chkbImg1, panelImg, config, esp, eng, imgHelp;
     private int anchoPantalla = 1; // Ancho de la pantalla, su valor se actualiza en el método surfaceChanged
     private int altoPantalla = 1; // Alto de la pantalla, su valor se actualiza en el método surfaceChanged
     private Hilo hilo; // Hilo encargado de dibujar y actualizar la física
-    private boolean funcionando = false, nuevoJuego = false, vibracion, idioma; // Control del hilo
-    public Bitmap[]  mcVidas;
-    ArrayList<Items> items = new ArrayList<>();
-    long tiempoGenera = 0;
-    int tickGenera = 2000;
+    private boolean funcionando = false; // nuevoJuego = false; // vibracion, idioma; // Control del hilo
+    // public Bitmap[]  mcVidas;
+    // ArrayList<Items> items = new ArrayList<>();
+    // long tiempoGenera = 0;
+    // int tickGenera = 2000;
     Fuente fuente;
-    boolean jugando = false;
-    public SoundPool efectos;
-    public Integer sonidoWoosh;
-    Paint paint;
+    // boolean jugando = false;
+    // public SoundPool efectos;
+    // public Integer sonidoWoosh;
+    // Paint paint;
    // Personaje mc;
-    ArrayList<Enemigo> enemigo = new ArrayList<>();
-    Fondo capa1, capa2, capa3, capa4, go, opciones, fondoMenuP;
-    Boton btnAtk, btnPot, btnR, btnL, btnCont, btnBorra, btnConf, btnPlay, btnCheckBox, btnConfig, btnHome, btnCreditos, btnLang, btnHelp;
-    Paint fade, fadeOut;
-    int pantallaJuego = 0, tiempoVibra = 100;
+    //ArrayList<Enemigo> enemigo = new ArrayList<>();
+    // Fondo capa1, capa2, capa3, capa4, go, opciones, fondoMenuP;
+   //  Boton btnAtk, btnPot, btnR, btnL, btnCont, btnBorra, btnConf, btnPlay, btnCheckBox, btnConfig, btnHome, btnCreditos, btnLang, btnHelp;
+    // Paint fade, fadeOut;
+    // int pantallaJuego = 0, tiempoVibra = 100;
 //    String recordNombre = "", claveRecord = "", clavePuntos = "";
-    Rect pantalla=new Rect(0,anchoPantalla,0,altoPantalla);
+    // Rect pantalla=new Rect(0,anchoPantalla,0,altoPantalla);
 
-    SensorManager sensorManager;
-    Sensor sensorLuz;
 
-    long tFade = 0;
-    int tickFade = 20;
-    int veloFade = -5;
+//    long tFade = 0;
+//    int tickFade = 20;
+//    int veloFade = -5;
 
-    String[] nombres = new String[5];
-    int[] puntos = new int[5];
+    //String[] nombres = new String[5];
+    // int[] puntos = new int[5];
 
-    Teclado teclado;
+    //Teclado teclado;
 
     /**
      * Obtiene archivos de la carpeta de assets para usar en el proyecto.
      * @param fichero Dirección del archivo que queremos utilizar
      * @return archivo que hemos llamado desde la carpeta
      */
-    public Bitmap getAsset(String fichero) {
-        try {
-            InputStream is = context.getAssets().open(fichero);
-            return BitmapFactory.decodeStream(is);
-        } catch (IOException e) {
-            return null;
-        }
-    }
+//    public Bitmap getAsset(String fichero) {
+//        try {
+//            InputStream is = context.getAssets().open(fichero);
+//            return BitmapFactory.decodeStream(is);
+//        } catch (IOException e) {
+//            return null;
+//        }
+//    }
 
     /**
      * Devuelve el ancho de pantalla en pixeles
      *
      * @return ancho de la pantalla en pixeles
      */
-    public static int getScreenWidth() {
-
-        return Resources.getSystem().getDisplayMetrics().widthPixels;
-    }
+//    public static int getScreenWidth() {
+//
+//        return Resources.getSystem().getDisplayMetrics().widthPixels;
+//    }
 
     /**
      * Devuelve el alto de pantalla en pixeles
      *
      * @return alto de pantalla en pixeles
      */
-    public static int getScreenHeight() {
-        return Resources.getSystem().getDisplayMetrics().heightPixels;
-    }
+//    public static int getScreenHeight() {
+//        return Resources.getSystem().getDisplayMetrics().heightPixels;
+//    }
 
     /**
      * Inicialización de la vista
@@ -126,7 +125,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
     public JuegoSurfaceView(Context context) {
         super(context);
         this.context=context;
-        audioManager=(AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
+        // audioManager=(AudioManager)context.getSystemService(Context.AUDIO_SERVICE);
 
         this.surfaceHolder = getHolder(); // Se obtiene el holder
         this.surfaceHolder.addCallback(this); // y se indica donde van las funciones callback
@@ -640,6 +639,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
      */
     @Override
     public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        Log.i("chocolate", "surfacechanged");
         this.anchoPantalla = width;
         this.altoPantalla = height;
 //        teclado = new Teclado(getAsset("Fuente/fuente.png"));
@@ -667,14 +667,12 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
      */
     @Override
     public void surfaceDestroyed(@NonNull SurfaceHolder surfaceHolder) {
+        Log.i("chocolate", "surfacedestroyed");
         hilo.setFuncionando(false);
         try {
             hilo.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        if (sensorLuz != null) {
-            sensorManager.unregisterListener(this);
         }
     }
 
@@ -691,9 +689,6 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
 //            hilo = new Hilo();
 //            hilo.start();
 //        }
-        if (sensorLuz != null) {
-            sensorManager.registerListener(this, sensorLuz, SensorManager.SENSOR_DELAY_GAME);
-        }
 
     }/**/
 
@@ -735,17 +730,18 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
 
 
 
-    public void cambiaEscena(int nuevaEscena){
+    public void cambiaEscena(int nuevaEscena){ //TODO cambia escena
         if (escenaActual.numEscena!=nuevaEscena){
+            escenaActual.onEscenaDestroyed();
             switch (nuevaEscena){
                 case 1: escenaActual=new EscenaMenu(context, 1, anchoPantalla, altoPantalla); break;
                 case 2: escenaActual=new EscenaJuego(context, 2, anchoPantalla, altoPantalla); break;
-               case 3: escenaActual=new EscenaRecord(context, 3, anchoPantalla, altoPantalla); break;
-//                case 4: escenaActual=new Escena4(context, 4, anchoPantalla, altoPantalla); break;
-//                case 5: escenaActual=new Escena5(context, 5, anchoPantalla, altoPantalla); break;
-//                case 6: escenaActual=new Escena6(context, 6, anchoPantalla, altoPantalla); break;
-
+                case 3: escenaActual=new EscenaRecord(context, 3, anchoPantalla, altoPantalla); break;
+                case 4: escenaActual=new EscenaConfig(context, 4, anchoPantalla, altoPantalla); break;
+                case 5: escenaActual=new EscenaCreditos(context, 5, anchoPantalla, altoPantalla); break;
+//              case 6: escenaActual=new Escena6(context, 6, anchoPantalla, altoPantalla); break;
             }
+            escenaActual.onEscenaCreated();
         }
     }
 
@@ -1095,7 +1091,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
      *
      * @param c Canvas sobre el que dibuja
      */
-    public void verRecords(Canvas c) {
+    /*public void verRecords(Canvas c) {
         //3
         if (pantallaJuego == 3) {
             for (int i = 0; i < 5; i++) {
@@ -1119,7 +1115,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
      *
      * @param c Canvas sobre el que dibuja
      */
-    public void menuP(Canvas c) {
+    /* public void menuP(Canvas c) {
         //0
         if (pantallaJuego == 0) {
             vibracion = Records.leeboolean("vibra", context);
@@ -1150,7 +1146,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
      *
      * @param c Canvas sobre el que dibuja
      */
-    public void menuOp(Canvas c) {
+    /*public void menuOp(Canvas c) {
         //4
         if (pantallaJuego == 4) {
             opciones.dibujar(c);
@@ -1185,7 +1181,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
      *
      * @param c Canvas sobre el que dibuja
      */
-    public void creditos(Canvas c) {
+    /*public void creditos(Canvas c) {
         //5
         if (pantallaJuego == 5) {
             fuente.dibujar(c, context.getResources().getString(R.string.idea), anchoPantalla / 10, altoPantalla / 4);
@@ -1220,5 +1216,5 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
 //        recordNombre = "";
 //        enemigo.clear();
 //
-//    }
+   }
 }

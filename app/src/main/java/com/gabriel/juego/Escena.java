@@ -18,7 +18,7 @@ public class Escena {
     int altoPantalla;
     int anchoPantalla;
     Context context;
-    Rect botonIz, botonDerecha;
+    Boton btnHome;
     Paint p;
     Rect menu;
     Fuente fuente;
@@ -28,12 +28,13 @@ public class Escena {
         this.anchoPantalla = anchoPantalla;
         this.context = context;
         this.fuente=fuente;
+        btnHome = new Boton("Home", getAsset("Botones/home.png"), (anchoPantalla / 10) * 8, (altoPantalla / 10) * 8);
         p=new Paint();
         p.setTextSize(altoPantalla/10);
         p.setColor(Color.WHITE);
         p.setTextAlign(Paint.Align.CENTER);
-        botonDerecha=new Rect(anchoPantalla-anchoPantalla/8,altoPantalla-anchoPantalla/8,anchoPantalla,altoPantalla);
-        botonIz=new Rect(0,altoPantalla-anchoPantalla/8,anchoPantalla/8,altoPantalla);
+        // botonDerecha=new Rect(anchoPantalla-anchoPantalla/8,altoPantalla-anchoPantalla/8,anchoPantalla,altoPantalla);
+        // botonIz=new Rect(0,altoPantalla-anchoPantalla/8,anchoPantalla/8,altoPantalla);
         this.numEscena=numEscena;
         this.menu = new Rect(100, 100, 500, 400);
         fuente = new Fuente(getAsset("Fuente/fuente.png"));
@@ -48,7 +49,10 @@ public class Escena {
             return null;
         }
     }
-
+    public void onEscenaCreated () {
+    }
+    public void onEscenaDestroyed () {
+    }
     public void dibujar(Canvas c){
 
 //        if (numEscena>1) c.drawRect(botonIz,p);
@@ -63,15 +67,13 @@ public class Escena {
     int onTouchEvent(MotionEvent event){
         int x=(int)event.getX();
         int y=(int)event.getY();
-
-        if (botonDerecha.contains(x,y)){
-            if (numEscena<6) return numEscena+1;
-        }else if(botonIz.contains(x,y)){
-            if (numEscena>1)return numEscena-1;
-        }
         if (numEscena!=1)   if (menu.contains(x,y)) return 1;
 
-
+        if (numEscena == 5 || numEscena==4 || numEscena == 3) {
+            if (btnHome.hitbox.contains(x, y)) {
+                return 1;
+            }
+        }
 
 
         return -1;
