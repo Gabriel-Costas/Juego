@@ -25,8 +25,9 @@ public class EscenaJuego extends Escena implements SensorEventListener {
     SensorManager sensorManager;
     Sensor sensorLuz;
     int numEscena = 1;
-    Bitmap btnAtacar, btnPocion, btnNoPocion, btnIzda, btnDer, spriteMC;
-    Boton btnAtk, btnPot, btnR, btnL;
+    Bitmap btnAtacar, btnPocion, btnNoPocion, btnIzda, btnDer, spriteMC, vida, pocionDrop, btnContinuar;
+    Boton btnAtk, btnPot, btnR, btnL, btnCont;
+    Bitmap[]  mcVidas;
     Paint boton;
     Personaje mc;
     int anp, alp;
@@ -76,12 +77,21 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         fondoMedio = Bitmap.createScaledBitmap(fondoMedio, anp, alp, true);
         fondoCerca = Bitmap.createScaledBitmap(fondoCerca, anp, alp, true);
         fondoLuz = Bitmap.createScaledBitmap(fondoLuz, anp, alp, true);
-        capa1 = new Fondo(bitmapFondo, 0, anp / 180, alp);
-        capa2 = new Fondo(fondoMedio, 0, anp / 80, alp);
-        capa3 = new Fondo(fondoCerca, 0, anp / 60, alp);
+        capa1 = new Fondo(bitmapFondo, 0, anp / 180, anp);
+        capa2 = new Fondo(fondoMedio, 0, anp / 80, anp);
+        capa3 = new Fondo(fondoCerca, 0, anp / 60, anp);
 
-        capa4 = new Fondo(fondoLuz, 0, anp / 50, alp);
+        capa4 = new Fondo(fondoLuz, 0, anp / 50, anp);
 
+        mcVidas = new Bitmap[2];
+        for (int i = 0; i < 2; i++) {
+            vida = getAsset("personaje/health.png");
+            vida = Bitmap.createBitmap(vida, (vida.getWidth() / 2) * i, 0, vida.getWidth() / 2, vida.getHeight());
+            mcVidas[i] = Bitmap.createScaledBitmap(vida, +anchoPantalla / 20, anchoPantalla / 20, true);
+        }
+
+        pocionDrop = getAsset("personaje/hpPotion.png");
+        pocionDrop = Bitmap.createScaledBitmap(pocionDrop, (pocionDrop.getWidth()) * 7, (pocionDrop.getHeight()) * 7, true);
 
         btnAtacar = getAsset("Botones/Attack.png");
         btnAtacar = Bitmap.createScaledBitmap(btnAtacar, btnAtacar.getWidth(), btnAtacar.getHeight(), true);
@@ -95,6 +105,10 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
         btnNoPocion = getAsset("Botones/PotionUsed.png");
         btnNoPocion = Bitmap.createScaledBitmap(btnNoPocion, btnNoPocion.getWidth(), btnNoPocion.getHeight(), true);
+
+        btnContinuar = getAsset("Botones/continuar.png");
+        btnContinuar = Bitmap.createScaledBitmap(btnContinuar, btnContinuar.getWidth() * 2, btnContinuar.getHeight() * 2, true);
+        btnCont = new Boton("Continuar", btnContinuar, (anchoPantalla / 9) * 4, (altoPantalla / 5) * 3);
 
         btnIzda = getAsset("Botones/arrow_left.png");
         btnIzda = Bitmap.createScaledBitmap(btnIzda, btnIzda.getWidth() * 2, btnIzda.getHeight() * 2, true);
@@ -176,7 +190,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
     }
 
     public void dibujar(Canvas c) {
-        c.drawColor(Color.RED);
+        c.drawColor(Color.BLACK);
         capa1.dibujar(c);
         capa2.dibujar(c);
         capa3.dibujar(c);
@@ -193,6 +207,27 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         for (Items it : items) {
             it.dibujar(c);
         }
+
+        for (int i = 0; i < mc.vidas; i++) {
+            c.drawBitmap(i <= mc.vidaActual - 1 ? mcVidas[0] : mcVidas[1], 100 + i * mcVidas[0].getWidth(), 100, null);
+        }
+
+        fuente.dibujar(c, context.getResources().getString(R.string.score) + mc.pts, anchoPantalla / 2, 100);
+
+        if (!jugando && mc.vivo) {
+            c.drawRect(0, 0, anchoPantalla, altoPantalla, fade);
+        } else {
+            if (!jugando && !mc.vivo) {
+                btnCont.setEnabled = true;
+                c.drawRect(0, 0, anchoPantalla, altoPantalla, fadeOut);
+
+                fuente.dibujar(c, context.getString(R.string.gameOver), ((anchoPantalla/5)*2), altoPantalla / 3);
+                btnCont.dibujar(c);
+
+            }
+
+        }
+
         super.dibujar(c);
 
     }
@@ -249,15 +284,16 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                     if (fade.getAlpha() < 10) {
                         jugando = true;
                     }
-                } else {
+                } else if (!jugando && !mc.vivo) {
+                    Log.i("chocolate", "WTF BRO WTF");
                     if (System.currentTimeMillis() - tFade >= tickFade && fadeOut.getAlpha() < 255) {
-
+                        Log.i("cafe", "pasa if");
                         fadeOut.setAlpha(fadeOut.getAlpha() - veloFade);
 
                         tFade = System.currentTimeMillis();
 
                     } else {
-
+                        Log.i("cafe", "pasa else");
                         prueba = true;
                     }
                 }
@@ -358,7 +394,6 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                             break;
                     }
 
-                    /* todo
                     for (int i = enemigo.size() - 1; i >= 0; i--) {
                         if (mc.golpea(enemigo.get(i).hitbox)) {
                             vibrator.vibrate(tiempoVibra);
@@ -373,7 +408,6 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                             }
                         }
                     }
-                    */
 
                 } else {
                     if (btnPot.hitbox.contains(x, y)) {

@@ -33,7 +33,7 @@ public class Fondo {
      * @param imagen imagen de fondo
      */
     public Fondo(Bitmap imagen) {
-        this.imagen = imagen;;
+        this.imagen = imagen;
     }
 
     /**
@@ -88,21 +88,26 @@ public class Fondo {
         x += veloDibujo;
         x2 += veloDibujo;
         if (veloDibujo > 0) {
-            if (x > anchoPantalla) {
+            Log.i("cafe2", "pasa dibujo fonto");
+            Log.i("cafe2", "" + anchoPantalla);
+            Log.i("cafe2", "" + imagen.getWidth());
+            Log.i("cafe2", "" + imagen.getHeight());
+            Log.i("cafe2", "" + x);
+            Log.i("cafe2", "" + x2);
+            if (x >= anchoPantalla) {
                 x = x2 - imagen.getWidth();
             }
-            if (x2 > anchoPantalla) {
+            if (x2 >= anchoPantalla) {
                 x2 = x - imagen.getWidth();
             }
-        } else {
-            if (veloDibujo < 0) {
-                if (x + imagen.getWidth() < 0) {
-                    x = x2 + imagen.getWidth();
-                }
-                if (x2 + imagen.getWidth() < 0) {
-                    x2 = x + imagen.getWidth();
-                }
+        } else if (veloDibujo < 0) {
+            if (x + imagen.getWidth() < 0) {
+                x = x2 + imagen.getWidth();
+            }
+            if (x2 + imagen.getWidth() < 0) {
+                x2 = x + imagen.getWidth();
             }
         }
+
     }
 }

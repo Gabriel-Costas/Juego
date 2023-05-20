@@ -16,7 +16,7 @@ import androidx.annotation.DimenRes;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Timer;
-
+// TODO AL DEJAR ATAQUE PULSADO: ATAQUES LOCOS
 public class Personaje {
     int color = Color.GREEN;
     int Px, Py,bossCheck, pts=0;
@@ -165,6 +165,8 @@ public class Personaje {
      * Gestiona la posición y tamaño de las hitbox del personaje
      */
     public void actualizaHitBox() {
+        Log.i("chocolate", "pasa actualiza hitbox");
+        Log.i("chocolate", derecha+"");
         hitbox = new Rect(Px + frames[numFrame].getWidth() / 3, Py + frames[numFrame].getHeight() / 6, Px + (frames[numFrame].getWidth() / 3) * 2, Py + frames[numFrame].getHeight());
         int auxh=(hitbox.right-hitbox.left)/20;
 
@@ -249,6 +251,7 @@ public class Personaje {
        // numFrame=0;
         cambia = true;
         derecha = false;
+        actualizaHitBox();
     }
 
     /**
@@ -262,6 +265,7 @@ public class Personaje {
         //numFrame=0;
         cambia = true;
         derecha = true;
+        actualizaHitBox();
     }
 
     /**
@@ -270,11 +274,13 @@ public class Personaje {
      * @param derecha Dirección hacia la que está mirando el personaje. True para derecha, false para izquierda
      */
     public void paro( boolean derecha) {
+        Log.i("chocolate", "pasa PARA");
        if (derecha) this.frames=parod;
         else this.frames=paroi;
         this.numFrame=0;
         parado = true;
         cambia = false;
+        ataca = false;
     }
 
     /**
