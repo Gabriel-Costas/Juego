@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 
 public class EscenaMenu extends Escena{
     int numEscena=0;
-    Rect op1, op2, op3;
     Boton btnPlay, btnConfig,btnCreditos;
     Bitmap playImg, config, imgCreditos, fondoMenu;
     Fondo fondoMenuP;

@@ -23,7 +23,6 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -39,7 +38,7 @@ public class JuegoView extends SurfaceView implements SurfaceHolder.Callback, Se
 
     public MediaPlayer mediaPlayer;
     public AudioManager audioManager;
-    MenuAyuda ma;
+    EscenaAyuda ma;
     private SurfaceHolder surfaceHolder; // Interfaz abstracta para manejar la superficie de dibujado
     private Context context; // Contexto de la aplicación
     private Bitmap bitmapFondo, fondoMedio, fondoCerca, fondoLuz; // Imagen de fondo
@@ -167,7 +166,7 @@ public class JuegoView extends SurfaceView implements SurfaceHolder.Callback, Se
         }
         sonidoWoosh=efectos.load(context, R.raw.swoshhh,1);
 
-        ma=new MenuAyuda(context,anchoPantalla,altoPantalla, idioma);
+//        ma=new MenuAyuda(context,anchoPantalla,altoPantalla, idioma);
     }
 
     /**
@@ -1167,7 +1166,7 @@ public class JuegoView extends SurfaceView implements SurfaceHolder.Callback, Se
         if (pantallaJuego==6){
 
             ma.imagenesAyuda();
-            ma.dibujaPantalla(c);
+            ma.dibujar(c);
         }
     }
 

@@ -2,20 +2,10 @@ package com.gabriel.juego;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Build;
 import android.os.Vibrator;
 import android.util.DisplayMetrics;
@@ -26,12 +16,8 @@ import android.view.SurfaceView;
 
 import androidx.annotation.NonNull;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.security.spec.ECField;
-import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Random;
+
 // TODO sensor luz
 // TODO MOVER ESCENAS
 public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Callback , SensorEventListener {
@@ -739,7 +725,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
                 case 3: escenaActual=new EscenaRecord(context, 3, anchoPantalla, altoPantalla); break;
                 case 4: escenaActual=new EscenaConfig(context, 4, anchoPantalla, altoPantalla); break;
                 case 5: escenaActual=new EscenaCreditos(context, 5, anchoPantalla, altoPantalla); break;
-//              case 6: escenaActual=new Escena6(context, 6, anchoPantalla, altoPantalla); break;
+              case 6: escenaActual=new EscenaAyuda(context, 6, anchoPantalla, altoPantalla); break;
             }
             escenaActual.onEscenaCreated();
         }

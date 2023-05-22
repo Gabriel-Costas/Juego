@@ -33,8 +33,6 @@ public class Escena {
         p.setTextSize(altoPantalla/10);
         p.setColor(Color.WHITE);
         p.setTextAlign(Paint.Align.CENTER);
-        // botonDerecha=new Rect(anchoPantalla-anchoPantalla/8,altoPantalla-anchoPantalla/8,anchoPantalla,altoPantalla);
-        // botonIz=new Rect(0,altoPantalla-anchoPantalla/8,anchoPantalla/8,altoPantalla);
         this.numEscena=numEscena;
         this.menu = new Rect(100, 100, 500, 400);
         fuente = new Fuente(getAsset("Fuente/fuente.png"));

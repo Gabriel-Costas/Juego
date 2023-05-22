@@ -39,7 +39,7 @@ public class Boton {
         this.Sy=Sy;
         actualizaHitBox();
         p = new Paint();
-        p.setColor(Color.TRANSPARENT);
+        p.setColor(Color.GREEN);
         p.setStyle(Paint.Style.STROKE);
         p.setStrokeWidth(10);
     }
@@ -51,7 +51,10 @@ public class Boton {
     public void dibujar(Canvas c) {
 
         c.drawRect(hitbox, p);
-        c.drawBitmap(imgBoton, Sx, Sy, null);
+        if(setEnabled){
+            c.drawBitmap(imgBoton, Sx, Sy, null);
+        }
+
     }
 
     /**

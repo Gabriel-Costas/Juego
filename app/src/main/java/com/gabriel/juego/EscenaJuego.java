@@ -196,6 +196,11 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         capa3.dibujar(c);
         capa4.dibujar(c);
         mc.dibujar(c);
+
+        for (Items it : items) {
+            it.dibujar(c);
+        }
+
         for (Enemigo e : enemigo) {
             e.dibujar(c);
         }
@@ -204,9 +209,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         btnL.dibujar(c);
         btnR.dibujar(c);
 
-        for (Items it : items) {
-            it.dibujar(c);
-        }
+
 
         for (int i = 0; i < mc.vidas; i++) {
             c.drawBitmap(i <= mc.vidaActual - 1 ? mcVidas[0] : mcVidas[1], 100 + i * mcVidas[0].getWidth(), 100, null);
@@ -357,6 +360,10 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
             case MotionEvent.ACTION_DOWN:
 //                Log.i("atacamos", "!pulso 22222 " + btnAtk.hitbox.contains(x, y) + " " + mc.ataca);
+                if (btnCont.hitbox.contains(x,y)){
+                    //TODO reiniciar juego
+                }
+
                 if (btnAtk.hitbox.contains(x, y) && !mc.ataca) {
                     combo++;
                     Log.i("atacamos", "!pulso 22222 atacooo");
