@@ -19,7 +19,9 @@ import java.util.Timer;
 // TODO AL DEJAR ATAQUE PULSADO: ATAQUES LOCOS
 public class Personaje {
     int color = Color.GREEN;
-    int Px, Py,bossCheck, pts=0;
+    int Px, Py,bossCheck;
+
+    static int pts=0;
     int vidas, vidaActual = 5, pociones=1, maxPociones=3;
     //public Bitmap imagen, imgParado,mcRun1,mca1;
     public Rect hitbox, hurtbox, hbCentro,iFrames;

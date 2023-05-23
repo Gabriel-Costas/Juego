@@ -361,7 +361,8 @@ public class EscenaJuego extends Escena implements SensorEventListener {
             case MotionEvent.ACTION_DOWN:
 //                Log.i("atacamos", "!pulso 22222 " + btnAtk.hitbox.contains(x, y) + " " + mc.ataca);
                 if (btnCont.hitbox.contains(x,y)){
-                    //TODO reiniciar juego
+                    Log.i("atacamos", "!pulso 22222 ññññññ");
+                    return 3;
                 }
 
                 if (btnAtk.hitbox.contains(x, y) && !mc.ataca) {
@@ -506,7 +507,6 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
 
                 break;
-                //return this.numEscena;
         }
          return this.numEscena;
     }
@@ -517,7 +517,6 @@ public class EscenaJuego extends Escena implements SensorEventListener {
             if (spawn < 50) {
             } else {
 
-               // todo
                 if (System.currentTimeMillis() - tiempoGenera > tickGenera) {
                     if (spawn < 75) {
                         enemigo.add(new Enemigo1(enemigo1));
@@ -537,13 +536,9 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
             }
         }
-      /*
-      /*
-       //  todo
         if (mc.bossCheck >= 1000) {
             enemigo.add(new Boss(boss));
             mc.bossCheck = 0;
         }
-        */
     }
 }

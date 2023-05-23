@@ -725,7 +725,7 @@ public class JuegoSurfaceView  extends SurfaceView implements SurfaceHolder.Call
                 case 3: escenaActual=new EscenaRecord(context, 3, anchoPantalla, altoPantalla); break;
                 case 4: escenaActual=new EscenaConfig(context, 4, anchoPantalla, altoPantalla); break;
                 case 5: escenaActual=new EscenaCreditos(context, 5, anchoPantalla, altoPantalla); break;
-              case 6: escenaActual=new EscenaAyuda(context, 6, anchoPantalla, altoPantalla); break;
+                case 6: escenaActual=new EscenaAyuda(context, 6, anchoPantalla, altoPantalla); break;
             }
             escenaActual.onEscenaCreated();
         }
