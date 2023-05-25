@@ -504,12 +504,12 @@ public class JuegoView extends SurfaceView implements SurfaceHolder.Callback, Se
 
                     }
                 }
-                for (int i = 0; i < teclado.botones.size(); i++) {
-                    if (teclado.botones.get(i).hitbox.contains(x, y) && pantallaJuego == 2) {
-                        vibrator.vibrate(tiempoVibra);
-                        recordNombre += teclado.botones.get(i).nombre;
-                    }
-                }
+//                for (int i = 0; i < teclado.botones.size(); i++) {
+//                    if (teclado.botones.get(i).hitbox.contains(x, y) && pantallaJuego == 2) {
+//                        vibrator.vibrate(tiempoVibra);
+//                        recordNombre += teclado.botones.get(i).nombre;
+//                    }
+//                }
                 if (pantallaJuego == 5 ||pantallaJuego==4|| pantallaJuego == 3) {
                     if (btnHome.hitbox.contains(x, y)) {
                         vibrator.vibrate(tiempoVibra);
@@ -634,7 +634,7 @@ public class JuegoView extends SurfaceView implements SurfaceHolder.Callback, Se
         anchoPantalla = width;
         altoPantalla = height;
         //teclado = new Teclado(getAsset("Fuente/fuente.png"));
-        teclado = new Teclado();
+        //teclado = new Teclado();
         teclado.add("qwertyuiop", (altoPantalla / 6) * 3);
         teclado.add("asdfghjkl", (altoPantalla / 6) * 4);
         teclado.add("zxcvbnm", (altoPantalla / 6) * 5);

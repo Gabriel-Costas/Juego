@@ -21,39 +21,42 @@ public class Teclado extends Boton{
      * Constructor de teclado
 
      */
-    public Teclado(){
+    public Teclado(Context context){
         botones=new ArrayList<>();
+        this.context=context;
+
+        imagen=getAsset("Fuente/fuente.png");
+
+        add("qwertyuiop", (altoPantalla / 6) * 3);
+        add("asdfghjkl", (altoPantalla / 6) * 4);
+        add("zxcvbnm", (altoPantalla / 6) * 5);
+
+//        int i=0;
+//        String cad="qwertyuiop";
+//        int posx=50;
+//        int posy=(altoPantalla / 6) * 3;
+//        for (i=0;i<cad.length();i++){
+//            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
+//            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
+//        }
+//
+//        cad="asdfghjkl";
+//         posx=50;
+//         posy=(altoPantalla / 6) * 4;
+//        for (i=0;i<cad.length();i++){
+//            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
+//            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
+//        }
+//
+//        cad="zxcvbnm";
+//        posx=50;
+//        posy=(altoPantalla / 6) * 5;
+//        for (i=0;i<cad.length();i++){
+//            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
+//            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
+//        }
 
 
-        this.imagen=getAsset("Fuente/fuente.png");
-int i=0;
-        String cad="qwertyuiop";
-        int posx=50;
-        int posy=(altoPantalla / 6) * 3;
-        for (i=0;i<cad.length();i++){
-            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
-            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
-        }
-
-        cad="asdfghjkl";
-         posx=50;
-         posy=(altoPantalla / 6) * 4;
-        for (i=0;i<cad.length();i++){
-            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
-            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
-        }
-
-        cad="zxcvbnm";
-        posx=50;
-        posy=(altoPantalla / 6) * 5;
-        for (i=0;i<cad.length();i++){
-            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
-            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
-        }
-
-//        botones.add("qwertyuiop", (altoPantalla / 6) * 3);
-//        botones.add("asdfghjkl", (altoPantalla / 6) * 4);
-//        botones.add("zxcvbnm", (altoPantalla / 6) * 5);
     }
 
     /**
