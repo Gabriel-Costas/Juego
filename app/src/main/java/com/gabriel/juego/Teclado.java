@@ -21,9 +21,10 @@ public class Teclado extends Boton{
      * Constructor de teclado
 
      */
-    public Teclado(Context context){
+    public Teclado(Context context, int altoPantalla){
         botones=new ArrayList<>();
         this.context=context;
+        this.altoPantalla = altoPantalla;
 
         imagen=getAsset("Fuente/fuente.png");
 

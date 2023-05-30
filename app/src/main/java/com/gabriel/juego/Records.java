@@ -15,6 +15,7 @@ public class Records {
     public static Boolean guardaint(String clave, int valor, Context context) {
         SharedPreferences sharedPreferences = context.getSharedPreferences("datos", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
+
         editor.putInt(clave, valor);
 
         return editor.commit();
