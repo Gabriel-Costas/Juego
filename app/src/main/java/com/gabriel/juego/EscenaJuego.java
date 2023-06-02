@@ -20,6 +20,9 @@ import android.view.MotionEvent;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Gestiona los elementos escena. Implementa el control del sensor
+ */
 public class EscenaJuego extends Escena implements SensorEventListener {
     SensorManager sensorManager;
     Sensor sensorLuz;
@@ -428,7 +431,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                                 mc.pts += enemigo.get(i).pts;
                                 mc.bossCheck += enemigo.get(i).pts;
                                 if (enemigo.get(i).drop) {
-                                    items.add(new Items(enemigo.get(i).Px, pocionDrop));
+                                    items.add(new Items(enemigo.get(i).Px, pocionDrop,alp));
                                 }
                                 enemigo.remove(i);
                             }

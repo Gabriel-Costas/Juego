@@ -7,6 +7,9 @@ import android.graphics.Rect;
 import android.os.Vibrator;
 import android.view.MotionEvent;
 
+/**
+ * Gestiona los elementos escena
+ */
 public class EscenaMenu extends Escena{
     int numEscena=0;
     Boton btnPlay, btnConfig,btnCreditos;

@@ -9,11 +9,14 @@ import android.util.Log;
 
 import java.util.ArrayList;
 
+/**
+ * Gestion de los items
+ */
 public class Items {
     Bitmap imagen;
     Rect hitbox;
-    int Px, pts;
-    int Py = (JuegoView.getScreenHeight() / 10) * 8;
+    int Px, pts, altopantalla;
+    int Py = (altopantalla / 10) * 8;
     int velo = 40, veloDibujo = 0;
     Paint p;
 
@@ -22,7 +25,7 @@ public class Items {
      * @param Px posicion de inicio de dibujo
      * @param imagen imagen del objeto
      */
-    public Items(int Px, Bitmap imagen) {
+    public Items(int Px, Bitmap imagen, int altopantalla) {
         this.Px = Px;
         this.imagen = imagen;
         p = new Paint();

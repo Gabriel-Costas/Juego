@@ -10,6 +10,9 @@ import android.view.MotionEvent;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Gestiona los elementos escena
+ */
 public class EscenaAyuda extends Escena{
 
     int numEscena=6;
@@ -20,22 +23,6 @@ public class EscenaAyuda extends Escena{
     Bitmap[] pantallasAyuda;
     boolean idioma;
     int imagen = 0;
-
-
-//    /**
-//     * Obtiene archivos de la carpeta de assets para usar en el proyecto.
-//     *
-//     * @param fichero Dirección del archivo que queremos utilizar
-//     * @return archivo que hemos llamado desde la carpeta
-//     */
-//    public Bitmap getAsset(String fichero) {
-//        try {
-//            InputStream is = context.getAssets().open(fichero);
-//            return BitmapFactory.decodeStream(is);
-//        } catch (IOException e) {
-//            return null;
-//        }
-//    }
 
     /**
      * Setter del contexto de la aplicación

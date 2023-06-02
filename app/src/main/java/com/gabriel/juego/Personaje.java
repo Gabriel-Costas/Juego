@@ -34,6 +34,11 @@ public class Personaje {
     Context context;
 
 
+    /**
+     * Invierte imagenes horizontalmente
+     * @param imagenes array de imagenes
+     * @return imagenes invertidas
+     */
     public Bitmap[] generaEspejos(Bitmap[] imagenes) {
         Bitmap[] aux = new Bitmap[imagenes.length];
         for (int i = 0; i < aux.length; i++) {
@@ -57,15 +62,15 @@ public class Personaje {
         this.altoP = altoP;
 
         p = new Paint();
-        p.setColor(Color.BLUE);
+        p.setColor(Color.TRANSPARENT);
         p.setStyle(Paint.Style.STROKE);
         p.setStrokeWidth(10);
         p3 = new Paint();
-        p3.setColor(Color.GREEN);
+        p3.setColor(Color.TRANSPARENT);
         p3.setStyle(Paint.Style.STROKE);
         p3.setStrokeWidth(10);
         p2 = new Paint();
-        p2.setColor(Color.RED);
+        p2.setColor(Color.TRANSPARENT);
         p2.setStyle(Paint.Style.STROKE);
         p2.setStrokeWidth(10);
         vidas = 5;
@@ -128,7 +133,12 @@ public class Personaje {
 
     }
 
-
+    /**
+     * Escala la altura de la imagen
+     * @param bitmapAux copia de la imagen original
+     * @param nuevoAlto altura nueva
+     * @return imagen escalada
+     */
     public Bitmap escalaAltura(Bitmap bitmapAux, int nuevoAlto) {
 
         if (nuevoAlto == bitmapAux.getHeight()) return bitmapAux;

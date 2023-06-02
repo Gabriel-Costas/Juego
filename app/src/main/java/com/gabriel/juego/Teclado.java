@@ -9,22 +9,28 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
+/**
+ * Gestion del teclado
+ */
 public class Teclado extends Boton{
 
     int coorX=0;
     ArrayList<Boton> botones;
     Bitmap imagen;
     Context context;
-    int altoPantalla;
+    int altoPantalla,anchopantalla;
 
     /**
-     * Constructor de teclado
-
+     * Constructor del teclado
+     * @param context contexto de la aplicacion
+     * @param altoPantalla alto de la pantalla
+     * @param anchopantalla ancho de la pantalla
      */
-    public Teclado(Context context, int altoPantalla){
+    public Teclado(Context context, int altoPantalla, int anchopantalla){
         botones=new ArrayList<>();
         this.context=context;
         this.altoPantalla = altoPantalla;
+        this.anchopantalla=anchopantalla;
 
         imagen=getAsset("Fuente/fuente.png");
 
@@ -41,7 +47,7 @@ public class Teclado extends Boton{
      */
     public void add(String lista, int coorY){
         char[] letras=lista.toCharArray();
-        int coorX=JuegoView.getScreenWidth()/5;
+        int coorX=anchopantalla/5;
         Fuente fuente=new Fuente(imagen);
         for(char ch:letras){
             coorX+=150;
@@ -63,7 +69,7 @@ public class Teclado extends Boton{
     /**
      * Carga elementos desde la biblioteca de assets
      * @param fichero elemento a cargar
-     * @return
+     * @return asset
      */
     public Bitmap getAsset(String fichero) {
         try {

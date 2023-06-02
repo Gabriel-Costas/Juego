@@ -5,14 +5,18 @@ import android.util.Log;
 
 import java.util.Random;
 
+/**
+ * Enemigo de tipo jefe
+ */
 public class Boss extends Enemigo{
 
     Random rand=new Random();
 
     /**
-     * Constructor de nuevo elemento jefe
-     *
-     * @param imagenes conjunto de frames de animacion del enemigo
+     * Constructor de enemigo tipo boss
+     * @param imagenes Conjunto de imagenes que representan al enemigo
+     * @param anp ancho de la pantalla en pixeles
+     * @param alp alto de la pantalla en pixeles
      */
     public Boss(Bitmap[] imagenes, int anp, int alp) {
         super(0, imagenes,anp,alp);

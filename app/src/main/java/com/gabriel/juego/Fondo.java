@@ -5,6 +5,9 @@ import android.graphics.Canvas;
 import android.graphics.PointF;
 import android.util.Log;
 
+/**
+ * Gestiona elementos tipo fondo
+ */
 public class Fondo {
 
     public int x, x2;

@@ -12,6 +12,9 @@ import android.view.MotionEvent;
 
 import java.util.Locale;
 
+/**
+ * Gestiona los elementos escena
+ */
 public class EscenaConfig extends Escena {
     int numEscena = 2;
     int tiempoVibra;

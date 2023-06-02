@@ -12,6 +12,9 @@ import android.view.MotionEvent;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Gestiona los elementos escena
+ */
 public class Escena {
 
     int numEscena=-1;

@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.view.MotionEvent;
 
+/**
+ * Gestiona los elementos escena
+ */
 public class EscenaCreditos extends Escena {
     int numEscena=3;
     Bitmap fondoMenu;

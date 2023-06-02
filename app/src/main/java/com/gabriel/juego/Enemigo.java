@@ -10,10 +10,13 @@ import android.util.Log;
 
 import java.util.Random;
 
+/**
+ * Clase padre de los enemigos
+ */
 public class Enemigo {
     int Px, Py, pts;
     int velocidad;
-    int ataque, ataqueBase, anchopantalla;
+    int ataque, ataqueBase, anchopantalla,altopantalla;
     int vida, vidaActual, tipo, lootChance;
     public Bitmap imagen;
     public Rect hitbox;
@@ -32,11 +35,14 @@ public class Enemigo {
      * Constructor de nuevo elemento enemigo
      * @param tipo tipo de enemigo a crear
      * @param imagenes conjunto de frames de animacion del enemigo
+     * @param anchopantalla ancho de la pantalla en pixeles
+     * @param altopantalla alto de la pantalla en pixeles
      */
     public Enemigo(int tipo, Bitmap[] imagenes, int anchopantalla, int altopantalla) {
 
                 this.imagenes=imagenes;
-
+        this.anchopantalla=anchopantalla;
+        this.altopantalla=altopantalla;
         this.imagen = imagenes[0];
         this.tipo = tipo;
         this.Px = ladoSpawn();

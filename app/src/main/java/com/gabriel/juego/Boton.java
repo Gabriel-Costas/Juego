@@ -6,6 +6,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 
+/**
+ * Gestion de los elementos tipo boton
+ */
 public class Boton {
     String nombre;
     Bitmap imgBoton;
@@ -39,7 +42,7 @@ public class Boton {
         this.Sy=Sy;
         actualizaHitBox();
         p = new Paint();
-        p.setColor(Color.GREEN);
+        p.setColor(Color.TRANSPARENT);
         p.setStyle(Paint.Style.STROKE);
         p.setStrokeWidth(10);
     }

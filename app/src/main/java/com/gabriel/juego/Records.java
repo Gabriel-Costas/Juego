@@ -3,6 +3,9 @@ package com.gabriel.juego;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+/**
+ * Gestor de los records
+ */
 public class Records {
 
     /**

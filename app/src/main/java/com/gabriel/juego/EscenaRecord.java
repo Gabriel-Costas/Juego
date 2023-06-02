@@ -14,6 +14,9 @@ import com.google.gson.reflect.TypeToken;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+/**
+ * Gestiona los elementos escena
+ */
 public class EscenaRecord extends Escena {
     int altoPantalla, anchoPantalla;
     Context context;
@@ -46,7 +49,7 @@ public class EscenaRecord extends Escena {
         nombres = new ArrayList<>();
         puntuaciones = new ArrayList<>();
         this.context = context;
-        teclado = new Teclado(context, alp);
+        teclado = new Teclado(context, alp,anp);
         this.numEscena = numEscena;
         this.anchoPantalla = anp;
         this.altoPantalla = alp;

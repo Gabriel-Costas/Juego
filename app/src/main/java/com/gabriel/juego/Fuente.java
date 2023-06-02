@@ -6,6 +6,9 @@ import android.graphics.Canvas;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * Gestion de la fuente
+ */
 public class Fuente {
     Bitmap fuente;
     static HashMap<String, Bitmap> letras = new HashMap<>();

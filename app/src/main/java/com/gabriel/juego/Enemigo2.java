@@ -5,6 +5,9 @@ import android.util.Log;
 
 import java.util.Random;
 
+/**
+ * Elementos tipo enemigo2
+ */
 public class Enemigo2 extends Enemigo{
 
     Random rand=new Random();
@@ -12,6 +15,8 @@ public class Enemigo2 extends Enemigo{
     /**
      * Constructor de enemigo tipo 2
      * @param imgs Conjunto de imagenes que representan al enemigo
+     *  @param anp ancho de la pantalla en pixeles
+     *  @param alp alto de la pantalla en pixeles
      */
     public Enemigo2(Bitmap[] imgs, int anp, int alp){
         super(1, imgs, anp, alp);
