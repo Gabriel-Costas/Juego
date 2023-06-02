@@ -13,8 +13,8 @@ public class Enemigo4 extends Enemigo {
      * Constructor de enemigo tipo 4
      * @param imgs Conjunto de imagenes que representan al enemigo
      */
-    public Enemigo4(Bitmap[] imgs) {
-        super(1, imgs);
+    public Enemigo4(Bitmap[] imgs, int anp, int alp) {
+        super(1, imgs,anp,alp);
         this.vidaActual = vida;
         pts=50;
         velocidad = 5;
@@ -25,7 +25,7 @@ public class Enemigo4 extends Enemigo {
         tframe = 0;
         tickFrame = 150;
         velMax = 5;
-        Py = JuegoView.getScreenHeight() / 2;
+        Py = alp / 2;
         Log.i("enemigo", "Enemigo4: "+Py);
         lootChance = 60;
         int randaux = rand.nextInt(101);

@@ -1,25 +1,19 @@
 package com.gabriel.juego;
 
-import android.app.Person;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Handler;
 import android.util.Log;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 
 public class Enemigo {
     int Px, Py, pts;
     int velocidad;
-    int ataque, ataqueBase;
+    int ataque, ataqueBase, anchopantalla;
     int vida, vidaActual, tipo, lootChance;
     public Bitmap imagen;
     public Rect hitbox;
@@ -34,17 +28,12 @@ public class Enemigo {
     boolean drop=false;
 
 
-
-    public void enemigoSprites(){
-
-    }
-
     /**
      * Constructor de nuevo elemento enemigo
      * @param tipo tipo de enemigo a crear
      * @param imagenes conjunto de frames de animacion del enemigo
      */
-    public Enemigo(int tipo, Bitmap[] imagenes) {
+    public Enemigo(int tipo, Bitmap[] imagenes, int anchopantalla, int altopantalla) {
 
                 this.imagenes=imagenes;
 
@@ -171,7 +160,7 @@ public class Enemigo {
      * Gestiona el daño recibido
      * @return true si hubo daño
      */
-    public boolean recibeDaño() {
+    public boolean recibeDano() {
         vidaActual--;
         Log.i("enemDaño", "  ataque: "+vidaActual);
         if (vidaActual <= 0) {
@@ -192,7 +181,7 @@ public class Enemigo {
         if (izda){
             lS=0 - imagen.getWidth();
         }else{
-            lS=JuegoView.getScreenWidth();
+            lS=anchopantalla;
         }
         return lS;
     }

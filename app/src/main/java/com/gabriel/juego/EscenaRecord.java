@@ -32,6 +32,14 @@ public class EscenaRecord extends Escena {
 
     int numEscena = 3;
 
+    /**
+     *
+     * Constructor de la escena
+     * @param context Contexto de la aplicación
+     * @param numEscena Codigo de la escena
+     * @param anp Alto de la pantalla
+     * @param alp Ancho de la pantalla
+     */
     public EscenaRecord(Context context, int numEscena, int anp, int alp) {
         super(context, anp, alp, numEscena);
         gson = new Gson();
@@ -120,6 +128,10 @@ public class EscenaRecord extends Escena {
 
     }
 
+    /**
+     * Dibuja en pantalla los elementos necesarios indicados
+     * @param c Canvas sobre el que dibujar
+     */
     public void dibujar(Canvas c) {
         Log.i("atacamos", "!pulso 22222 pp67yppp");
         go.dibujar(c);
@@ -137,12 +149,14 @@ public class EscenaRecord extends Escena {
         }
         btnConf.dibujar(c);
 
-// TODO Hacer que esto funcione
 
     }
 
-
-    //TODO WTF???
+    /**
+     * Gestiona eventos de toque en pantalla
+     * @param event tipo de evento a gestionar
+     * @return Devuelve el número de escena
+     */
     public int onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:

@@ -16,7 +16,14 @@ public class EscenaMenu extends Escena{
     int tiempoVibra=100;
     boolean nuevoJuego = false;
 
-
+    /**
+     *
+     * Constructor de la escena
+     * @param context Contexto de la aplicación
+     * @param numEscena Codigo de la escena
+     * @param anp Alto de la pantalla
+     * @param alp Ancho de la pantalla
+     */
     public EscenaMenu(Context context, int numEscena, int anp, int alp){
         super(context, anp, alp, numEscena);
         this.numEscena=numEscena;
@@ -47,6 +54,10 @@ public class EscenaMenu extends Escena{
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
 
+    /**
+     * Dibuja en pantalla los elementos necesarios indicados
+     * @param c Canvas sobre el que dibujar
+     */
     public void dibujar(Canvas c){
         fondoMenuP.dibujar(c);
         btnPlay.dibujar(c);
@@ -57,12 +68,12 @@ public class EscenaMenu extends Escena{
         fuente.dibujar(c, context.getResources().getString(R.string.creditos), btnCreditos.Sx + imgCreditos.getWidth(), btnCreditos.Sy + imgCreditos.getHeight() / 2);
     }
 
-    public void actualizarFisica(){
 
-    }
-
-
-
+    /**
+     * Gestiona eventos de toque en pantalla
+     * @param event tipo de evento a gestionar
+     * @return Devuelve el número de escena
+     */
     public int onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();

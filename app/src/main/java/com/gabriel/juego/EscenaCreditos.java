@@ -11,6 +11,15 @@ public class EscenaCreditos extends Escena {
     Bitmap fondoMenu;
     Fondo fondoMenuP;
 
+
+    /**
+     *
+     * Constructor de la escena
+     * @param context Contexto de la aplicación
+     * @param numEscena Codigo de la escena
+     * @param anp Alto de la pantalla
+     * @param alp Ancho de la pantalla
+     */
     public EscenaCreditos(Context context, int numEscena, int anp, int alp) {
         super(context,  anp, alp, numEscena);
         fondoMenu = getAsset("Fuente/menuP.jpg");
@@ -19,6 +28,10 @@ public class EscenaCreditos extends Escena {
         this.numEscena=numEscena;
     }
 
+    /**
+     * Dibuja en pantalla los elementos necesarios indicados
+     * @param c Canvas sobre el que dibujar
+     */
     public void dibujar(Canvas c){
         super.dibujar(c);
         fondoMenuP.dibujar(c);
@@ -29,10 +42,11 @@ public class EscenaCreditos extends Escena {
         btnHome.setEnabled = true;
     }
 
-    public void actualizarFisica(){
-
-    }
-
+    /**
+     * Gestiona eventos de toque en pantalla
+     * @param event tipo de evento a gestionar
+     * @return Devuelve el número de escena
+     */
     int onTouchEvent(MotionEvent event){
         return super.onTouchEvent(event);
     }

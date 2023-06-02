@@ -32,32 +32,6 @@ public class Teclado extends Boton{
         add("asdfghjkl", (altoPantalla / 6) * 4);
         add("zxcvbnm", (altoPantalla / 6) * 5);
 
-//        int i=0;
-//        String cad="qwertyuiop";
-//        int posx=50;
-//        int posy=(altoPantalla / 6) * 3;
-//        for (i=0;i<cad.length();i++){
-//            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
-//            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
-//        }
-//
-//        cad="asdfghjkl";
-//         posx=50;
-//         posy=(altoPantalla / 6) * 4;
-//        for (i=0;i<cad.length();i++){
-//            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
-//            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
-//        }
-//
-//        cad="zxcvbnm";
-//        posx=50;
-//        posy=(altoPantalla / 6) * 5;
-//        for (i=0;i<cad.length();i++){
-//            botones.add(new Boton(cad.charAt(i)+"",Fuente.letras.get(cad.charAt(i)),posx, posy) );
-//            posx=posx+Fuente.letras.get(cad.charAt(i)).getWidth();
-//        }
-
-
     }
 
     /**
@@ -86,7 +60,11 @@ public class Teclado extends Boton{
     }
 
 
-
+    /**
+     * Carga elementos desde la biblioteca de assets
+     * @param fichero elemento a cargar
+     * @return
+     */
     public Bitmap getAsset(String fichero) {
         try {
             InputStream is = context.getAssets().open(fichero);

@@ -21,6 +21,14 @@ public class EscenaConfig extends Escena {
     boolean idioma, vibracion;
     Vibrator vibrator;
 
+    /**
+     *
+     * Constructor de la escena
+     * @param context Contexto de la aplicación
+     * @param numEscena Codigo de la escena
+     * @param anp Alto de la pantalla
+     * @param alp Ancho de la pantalla
+     */
     public EscenaConfig(Context context, int numEscena, int anp, int alp) {
         super(context, anp, alp, numEscena);
         vibrator=(Vibrator)context.getSystemService(Context.VIBRATOR_SERVICE);
@@ -61,6 +69,10 @@ public class EscenaConfig extends Escena {
         }
     }
 
+    /**
+     * Dibuja en pantalla los elementos necesarios indicados
+     * @param c Canvas sobre el que dibujar
+     */
     public void dibujar(Canvas c) {
         super.dibujar(c);
         opciones.dibujar(c);
@@ -70,9 +82,6 @@ public class EscenaConfig extends Escena {
         fuente.dibujar(c, context.getResources().getString(R.string.idioma), (anchoPantalla / 30) * 5, (int) (altoPantalla / 2.5));
 
         btnCheckBox.dibujar(c);
-
-
-
         btnLang.dibujar(c);
 
         btnHome.dibujar(c);
@@ -80,10 +89,12 @@ public class EscenaConfig extends Escena {
         btnHelp.dibujar(c);
     }
 
-    public void actualizarFisica() {
 
-    }
-
+    /**
+     * Gestiona eventos de toque en pantalla
+     * @param event tipo de evento a gestionar
+     * @return Devuelve el número de escena
+     */
     int onTouchEvent(MotionEvent event) {
 
         int aux = super.onTouchEvent(event);
@@ -135,6 +146,10 @@ public class EscenaConfig extends Escena {
 
     }
 
+    /**
+     * Gestiona la selección del idioma de la aplicación
+     * @param codIdioma código del idioma selecccionado
+     */
     public void cambiaIdioma (String codIdioma){
         Resources res = context.getResources();
         DisplayMetrics dm = res.getDisplayMetrics();

@@ -6,7 +6,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Rect;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -51,13 +50,20 @@ public class EscenaJuego extends Escena implements SensorEventListener {
     boolean prueba = false;
     public AudioManager audioManager;
     private Bitmap bitmapFondo, fondoMedio, fondoCerca, fondoLuz; // Imagen de fondo
-    // TODO: 16/5/23
     Bitmap[] enemigo1;
     Bitmap[] enemigo2;
     Bitmap[] enemigo3;
     Bitmap[] enemigo4;
     Bitmap[] boss;
 
+    /**
+     *
+     * Constructor de la escena
+     * @param context Contexto de la aplicación
+     * @param numEscena Codigo de la escena
+     * @param anp Alto de la pantalla
+     * @param alp Ancho de la pantalla
+     */
     public EscenaJuego(Context context, int numEscena, int anp, int alp) {
         super(context, anp, alp, numEscena);
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
@@ -180,15 +186,10 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
     }
 
-    public void juegoReset() {
-        spriteMC = BitmapFactory.decodeResource(context.getResources(), R.drawable.personaje_idle1);
-        spriteMC = Bitmap.createScaledBitmap(spriteMC, spriteMC.getWidth() / 3, spriteMC.getHeight() / 3, true);
-        mc = new Personaje(context,/*spriteMC*/ anchoPantalla, altoPantalla,anp / 6, alp / 4 * 2);
-//        recordNombre = "";
-        enemigo.clear();
-
-    }
-
+    /**
+     * Dibuja en pantalla los elementos necesarios indicados
+     * @param c Canvas sobre el que dibujar
+     */
     public void dibujar(Canvas c) {
         c.drawColor(Color.BLACK);
         capa1.dibujar(c);
@@ -235,6 +236,9 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
     }
 
+    /**
+     * Actualiza los elementos ejecutados
+     */
     public void actualizarFisica() {
         if (nuevoJuego) {
             if (jugando) {
@@ -263,7 +267,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                             enemigo.get(i).mover(mc.hbCentro, capa4.veloDibujo);
                             if (enemigo.get(i).ataque(mc.hitbox)) {
                                 vibrator.vibrate(tiempoVibra * 2);
-                                mc.recibeDaño(enemigo.get(i).ataque);
+                                mc.recibeDano(enemigo.get(i).ataque);
                                 if (mc.vidaActual <= 0) {
                                     //todo morir
                                     vibrator.vibrate(tiempoVibra * 10);
@@ -306,6 +310,9 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
     }
 
+    /**
+     * Código que se ejecuta al crear una escena
+     */
     @Override
     public void onEscenaCreated() {
         Log.i("chocolate", "pasacreated");
@@ -314,6 +321,9 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         }
     }
 
+    /**
+     * Código que se ejecuta al destruir una escena
+     */
     @Override
     public void onEscenaDestroyed() {
         Log.i("chocolate", "pasaDestroyed");
@@ -322,6 +332,11 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         }
     }
 
+    /**
+     * Gestiona cambios en el sensor de claridad del dispositivo
+     *
+     * @param sensorEvent eventos del sensor de luminosidad
+     */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
         float luz = sensorEvent.values[0];
@@ -343,23 +358,26 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         }
     }
 
+    /**
+     * Gestiona la sensibilidad del sensor de claridad
+     * @param sensor Sensor de claridad
+     * @param accuracy Precisión del sensor
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
+    /**
+     * Gestiona eventos de toque en pantalla
+     * @param event tipo de evento a gestionar
+     * @return Devuelve el número de escena
+     */
     int onTouchEvent(MotionEvent event) {
         int x = (int) event.getX();
         int y = (int) event.getY();
-      //  int aux = super.onTouchEvent(event);
-
-      //  if (aux != this.numEscena && aux != -1) return aux;
-
-
-//        Log.i("arranco", "!pulso");
         switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
-//                Log.i("atacamos", "!pulso 22222 " + btnAtk.hitbox.contains(x, y) + " " + mc.ataca);
                 if (btnCont.hitbox.contains(x,y)){
                     Log.i("atacamos", "!pulso 22222 ññññññ");
                     return 3;
@@ -405,7 +423,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                     for (int i = enemigo.size() - 1; i >= 0; i--) {
                         if (mc.golpea(enemigo.get(i).hitbox)) {
                             vibrator.vibrate(tiempoVibra);
-                            boolean muere = enemigo.get(i).recibeDaño();
+                            boolean muere = enemigo.get(i).recibeDano();
                             if (muere) {
                                 mc.pts += enemigo.get(i).pts;
                                 mc.bossCheck += enemigo.get(i).pts;
@@ -473,26 +491,11 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                                 lado = true;
                                 combo = 0;
                             } else {
-                              /* todo
-                                if (btnCont.hitbox.contains(x, y) && pantallaJuego == 1) {
-                                    vibrator.vibrate(tiempoVibra);
-                                    pantallaJuego = 2;
-                                }*/
                             }
                         }
 
                     }
                 }
-                /*
-                // todo
-
-                for (int i = 0; i < teclado.botones.size(); i++) {
-                    if (teclado.botones.get(i).hitbox.contains(x, y) && pantallaJuego == 2) {
-                        vibrator.vibrate(tiempoVibra);
-                        recordNombre += teclado.botones.get(i).nombre;
-                    }
-                }
-                */
                 break;
             case MotionEvent.ACTION_UP:
                 Log.i("Paro", "!paro 22222");
@@ -511,6 +514,11 @@ public class EscenaJuego extends Escena implements SensorEventListener {
          return this.numEscena;
     }
 
+    /**
+     * Gestiona la creacion de nuevos enemigos en la partida
+     *
+     * @param totalVivos total de enemigos actualmente en el juego
+     */
     public void spawnEnemigo ( int totalVivos){
         if (enemigo.size() < 10) {
             int spawn = new Random().nextInt(101);
@@ -519,15 +527,15 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
                 if (System.currentTimeMillis() - tiempoGenera > tickGenera) {
                     if (spawn < 75) {
-                        enemigo.add(new Enemigo1(enemigo1));
+                        enemigo.add(new Enemigo1(enemigo1,anp,alp));
                     } else {
                         if (spawn < 85) {
-                            enemigo.add(new Enemigo3(enemigo4));
+                            enemigo.add(new Enemigo3(enemigo4,anp,alp));
                         } else {
                             if (spawn < 95) {
-                                enemigo.add(new Enemigo4(enemigo3));
+                                enemigo.add(new Enemigo4(enemigo3,anp,alp));
                             } else {
-                                enemigo.add(new Enemigo2(enemigo2));
+                                enemigo.add(new Enemigo2(enemigo2,anp,alp));
                             }
                         }
                     }
@@ -537,7 +545,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
             }
         }
         if (mc.bossCheck >= 1000) {
-            enemigo.add(new Boss(boss));
+            enemigo.add(new Boss(boss,anp,alp));
             mc.bossCheck = 0;
         }
     }
