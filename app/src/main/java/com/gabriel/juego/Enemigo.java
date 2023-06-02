@@ -153,6 +153,8 @@ public class Enemigo {
      */
     public boolean ataque(Rect perso) {
         Rect persoHitbox = clonaRect( perso);
+        persoHitbox.left-=20;
+        persoHitbox.right+=20;
         Rect enehit = clonaRect(hitbox);
 
         if (enehit.intersect(persoHitbox)) {

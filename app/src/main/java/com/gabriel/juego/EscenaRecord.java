@@ -20,7 +20,8 @@ import java.util.ArrayList;
 public class EscenaRecord extends Escena {
     int altoPantalla, anchoPantalla;
     Context context;
-    String recordNombre = "", claveRecord = "", clavePuntos = "";
+    String recordNombre = "";
+    int claveRecord;
     Canvas c;
     // int pts=Personaje.pts;
     Bitmap fondoMuerte, btnBorrar, btnConfirmar;
@@ -46,8 +47,6 @@ public class EscenaRecord extends Escena {
     public EscenaRecord(Context context, int numEscena, int anp, int alp) {
         super(context, anp, alp, numEscena);
         gson = new Gson();
-        nombres = new ArrayList<>();
-        puntuaciones = new ArrayList<>();
         this.context = context;
         teclado = new Teclado(context, alp,anp);
         this.numEscena = numEscena;
@@ -63,64 +62,37 @@ public class EscenaRecord extends Escena {
         btnConfirmar = fuente.getTexto('*');
         btnConf = new Boton("Confirmar", btnConfirmar, (anchoPantalla / 10) * 9, (altoPantalla / 6) * 5);
 
-//        Type typeString = new TypeToken<ArrayList<String>>() {}.getType();
-//        nombres = gson.fromJson(Records.leestring("puntuaciones", context), typeString);
-//
-//        Type typeNumber = new TypeToken<ArrayList<String>>() {}.getType();
-//        puntuaciones = gson.fromJson(Records.leestring("puntuaciones", context), typeNumber);
+        Type typeString = new TypeToken<ArrayList<String>>() {}.getType();
+        nombres = gson.fromJson(Records.leestring("nombres", context), typeString);
+        if (nombres == null) {
+            nombres = new ArrayList<String>();
+        }
 
-        if (Personaje.pts > Records.leeint("puntuacion0", context)) {
-            for (Boton b : teclado.botones) {
-                b.setEnabled = true;
-            }
 
-            Records.guardaint("puntuacion4", Records.leeint("puntuacion3", context), context);
-            Records.guardastring("nombrepunt4", Records.leestring("nombrepunt3", context), context);
-            Records.guardaint("puntuacion3", Records.leeint("puntuacion2", context), context);
-            Records.guardastring("nombrepunt3", Records.leestring("nombrepunt2", context), context);
-            Records.guardaint("puntuacion2", Records.leeint("puntuacion1", context), context);
-            Records.guardastring("nombrepunt2", Records.leestring("nombrepunt1", context), context);
-            Records.guardaint("puntuacion1", Records.leeint("puntuacion0", context), context);
-            Records.guardastring("nombrepunt1", Records.leestring("nombrepunt0", context), context);
-            claveRecord = "nombrepunt0";
-            clavePuntos = "puntuacion0";
+        Type typeNumber = new TypeToken<ArrayList<Integer>>() {}.getType();
+        puntuaciones = gson.fromJson(Records.leestring("puntuaciones", context), typeNumber);
+        if (puntuaciones == null) {
+            puntuaciones = new ArrayList<Integer>();
+        }
+        Log.i("vainilla", puntuaciones.toString());
+        claveRecord = -1;
+        if (puntuaciones.size() < 5 || (Personaje.pts > puntuaciones.get(puntuaciones.size() - 1))) {
+            claveRecord = 0;
+            for (int i = 0; i < puntuaciones.size(); i++) {
+                Log.i("vainilla", "test" );
+                Log.i("vainilla", "" + puntuaciones.get(i));
+                Log.i("vainilla", "" + Personaje.pts);
+                if (puntuaciones.get(i) > Personaje.pts) {
+                    claveRecord = i+1;
+                    Log.i("vainilla", "" + i);
+                }
+            }
+            if (puntuaciones.size() < 5 && puntuaciones.size() > 0 && claveRecord == 0 && Personaje.pts < puntuaciones.get(puntuaciones.size() - 1)) { claveRecord = puntuaciones.size(); }
 
-        } else if (Personaje.pts > Records.leeint("puntuacion1", context)) {
             for (Boton b : teclado.botones) {
                 b.setEnabled = true;
             }
-            Records.guardaint("puntuacion4", Records.leeint("puntuacion3", context), context);
-            Records.guardastring("nombrepunt4", Records.leestring("nombrepunt3", context), context);
-            Records.guardaint("puntuacion3", Records.leeint("puntuacion2", context), context);
-            Records.guardastring("nombrepunt3", Records.leestring("nombrepunt2", context), context);
-            Records.guardaint("puntuacion2", Records.leeint("puntuacion1", context), context);
-            Records.guardastring("nombrepunt2", Records.leestring("nombrepunt1", context), context);
-            claveRecord = "nombrepunt1";
-            clavePuntos = "puntuacion1";
-        } else if (Personaje.pts > Records.leeint("puntuacion2", context)) {
-            for (Boton b : teclado.botones) {
-                b.setEnabled = true;
-            }
-            Records.guardaint("puntuacion4", Records.leeint("puntuacion3", context), context);
-            Records.guardastring("nombrepunt4", Records.leestring("nombrepunt3", context), context);
-            Records.guardaint("puntuacion3", Records.leeint("puntuacion2", context), context);
-            Records.guardastring("nombrepunt3", Records.leestring("nombrepunt2", context), context);
-            claveRecord = "nombrepunt2";
-            clavePuntos = "puntuacion2";
-        } else if (Personaje.pts > Records.leeint("puntuacion3", context)) {
-            for (Boton b : teclado.botones) {
-                b.setEnabled = true;
-            }
-            Records.guardaint("puntuacion4", Records.leeint("puntuacion3", context), context);
-            Records.guardastring("nombrepunt4", Records.leestring("nombrepunt3", context), context);
-            claveRecord = "nombrepunt3";
-            clavePuntos = "puntuacion3";
-        } else if (Personaje.pts > Records.leeint("puntuacion4", context)) {
-            for (Boton b : teclado.botones) {
-                b.setEnabled = true;
-            }
-            claveRecord = "nombrepunt4";
-            clavePuntos = "puntuacion4";
+            Log.i("vainilla", "pasa ifff");
 
         } else {
             introducirDatos = false;
@@ -136,7 +108,6 @@ public class EscenaRecord extends Escena {
      * @param c Canvas sobre el que dibujar
      */
     public void dibujar(Canvas c) {
-        Log.i("atacamos", "!pulso 22222 pp67yppp");
         go.dibujar(c);
         if (introducirDatos) {
             teclado.dibujar(c);
@@ -147,7 +118,7 @@ public class EscenaRecord extends Escena {
             int imprimeY = (altoPantalla / 11) * 2;
             for (int i = 0; i < nombres.size(); i++) {
                 fuente.dibujar(c, nombres.get(i) + ": " + puntuaciones.get(i), (anchoPantalla / 7), imprimeY);
-                imprimeY += 80;
+                imprimeY += 100;
             }
         }
         btnConf.dibujar(c);
@@ -184,12 +155,16 @@ public class EscenaRecord extends Escena {
                 if (btnConf.hitbox.contains(x, y)) {
                     vibrator.vibrate(100);
                     if (introducirDatos) {
-                        Records.guardastring(claveRecord, recordNombre, context);
-                        Records.guardaint(clavePuntos, Personaje.pts, context);
-                        nombres.add(Records.leestring("nombrepunt1", context));
-                        puntuaciones.add(Records.leeint("puntuacion1", context));
-                        nombres.add(Records.leestring("nombrepunt2", context));
-                        puntuaciones.add(Records.leeint("puntuacion2", context));
+                        nombres.add(claveRecord, recordNombre);
+                        puntuaciones.add(claveRecord, Personaje.pts);
+                        if(nombres.size() > 5) {
+                            nombres.remove(nombres.size()-1);
+                            puntuaciones.remove(puntuaciones.size()-1);
+                        }
+                        Records.guardastring("nombres", gson.toJson(nombres), context);
+                        Records.guardastring("puntuaciones", gson.toJson(puntuaciones), context);
+
+
                         teclado.setEnabled = false;
                         btnBorra.setEnabled = false;
                         introducirDatos = false;

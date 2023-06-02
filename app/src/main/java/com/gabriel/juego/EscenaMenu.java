@@ -49,10 +49,10 @@ public class EscenaMenu extends Escena{
         btnPlay.hitbox=new Rect(btnPlay.Sx,btnPlay.Sy,btnPlay.Sx+btnPlay.imgBoton.getWidth()*5,btnPlay.Sy+btnPlay.imgBoton.getHeight());
 
         btnConfig.setEnabled = true;
-        btnConfig.hitbox=new Rect(btnConfig.Sx,btnConfig.Sy,btnConfig.Sx+btnConfig.imgBoton.getWidth()*5,btnConfig.Sy+btnConfig.imgBoton.getHeight());
+        btnConfig.hitbox=new Rect(btnConfig.Sx,btnConfig.Sy,btnConfig.Sx+btnConfig.imgBoton.getWidth()*10,btnConfig.Sy+btnConfig.imgBoton.getHeight());
 
         btnCreditos.setEnabled = true;
-        btnCreditos.hitbox=new Rect(btnCreditos.Sx,btnCreditos.Sy,btnCreditos.Sx+btnCreditos.imgBoton.getWidth()*5,btnCreditos.Sy+btnCreditos.imgBoton.getHeight());
+        btnCreditos.hitbox=new Rect(btnCreditos.Sx,btnCreditos.Sy,btnCreditos.Sx+btnCreditos.imgBoton.getWidth()*8,btnCreditos.Sy+btnCreditos.imgBoton.getHeight());
 
         vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
     }
@@ -64,11 +64,11 @@ public class EscenaMenu extends Escena{
     public void dibujar(Canvas c){
         fondoMenuP.dibujar(c);
         btnPlay.dibujar(c);
-        fuente.dibujar(c, context.getResources().getString(R.string.play), btnPlay.Sx + playImg.getWidth(), btnPlay.Sy + playImg.getHeight() / 2);
+        fuente.dibujar(c, context.getResources().getString(R.string.play), btnPlay.Sx + playImg.getWidth(), btnPlay.Sy + (playImg.getHeight() / 5)*2);
         btnConfig.dibujar(c);
-        fuente.dibujar(c, context.getResources().getString(R.string.config), btnConfig.Sx + config.getWidth(), btnConfig.Sy + config.getHeight() / 2);
+        fuente.dibujar(c, context.getResources().getString(R.string.config), btnConfig.Sx + config.getWidth(), btnConfig.Sy + (config.getHeight() / 5)*2);
         btnCreditos.dibujar(c);
-        fuente.dibujar(c, context.getResources().getString(R.string.creditos), btnCreditos.Sx + imgCreditos.getWidth(), btnCreditos.Sy + imgCreditos.getHeight() / 2);
+        fuente.dibujar(c, context.getResources().getString(R.string.creditos), btnCreditos.Sx + imgCreditos.getWidth(), btnCreditos.Sy + (imgCreditos.getHeight() /5)* 2);
     }
 
 
