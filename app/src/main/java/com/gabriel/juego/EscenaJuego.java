@@ -96,12 +96,10 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         btnAtacar = getAsset("Botones/Attack.png");
         btnAtacar = Bitmap.createScaledBitmap(btnAtacar, btnAtacar.getWidth(), btnAtacar.getHeight(), true);
         btnAtk = new Boton("Atacar", btnAtacar, (anp / 10) * 9, (alp / 4) * 3);
-        btnAtk.setEnabled = false;
 
         btnPocion = getAsset("Botones/Potion.png");
         btnPocion = Bitmap.createScaledBitmap(btnPocion, btnPocion.getWidth(), btnPocion.getHeight(), true);
         btnPot = new Boton("Pocion", btnPocion, (anp / 10) * 8, (alp / 4) * 3);
-        btnPot.setEnabled = false;
 
         btnNoPocion = getAsset("Botones/PotionUsed.png");
         btnNoPocion = Bitmap.createScaledBitmap(btnNoPocion, btnNoPocion.getWidth(), btnNoPocion.getHeight(), true);
@@ -113,12 +111,10 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         btnIzda = getAsset("Botones/arrow_left.png");
         btnIzda = Bitmap.createScaledBitmap(btnIzda, btnIzda.getWidth() * 2, btnIzda.getHeight() * 2, true);
         btnL = new Boton("Izquierda", btnIzda, (anp / 10) * 1, (alp / 4) * 3);
-        btnL.setEnabled = false;
 
         btnDer = getAsset("Botones/arrow_right.png");
         btnDer = Bitmap.createScaledBitmap(btnDer, btnDer.getWidth() * 2, btnDer.getHeight() * 2, true);
         btnR = new Boton("Izquierda", btnDer, (anp / 10) * 2, (alp / 4) * 3);
-        btnR.setEnabled = false;
 
         fade = new Paint();
         fade.setColor(Color.BLACK);
@@ -261,7 +257,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                         for (int i = enemigo.size() - 1; i >= 0; i--) {
                             enemigo.get(i).actualizaFisica();
                             enemigo.get(i).mover(mc.hbCentro, capa4.veloDibujo);
-                            if (enemigo.get(i).ataque(mc.hitbox)) {
+                            if (enemigo.get(i).ataque(mc.hbCentro)) {
                                 vibrator.vibrate(tiempoVibra * 2);
                                 mc.recibeDaño(enemigo.get(i).ataque);
                                 if (mc.vidaActual <= 0) {
@@ -309,6 +305,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
     @Override
     public void onEscenaCreated() {
         Log.i("chocolate", "pasacreated");
+        Personaje.pts = 0;
         if (sensorLuz != null) {
             sensorManager.registerListener(this, sensorLuz, SensorManager.SENSOR_DELAY_GAME);
         }
