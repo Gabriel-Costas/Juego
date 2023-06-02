@@ -10,12 +10,12 @@ public class Boss extends Enemigo{
     Random rand=new Random();
 
     /**
-     * Constructor de nuevo elemento enemigo
+     * Constructor de nuevo elemento jefe
      *
      * @param imagenes conjunto de frames de animacion del enemigo
      */
-    public Boss(Bitmap[] imagenes) {
-        super(0, imagenes);
+    public Boss(Bitmap[] imagenes, int anp, int alp) {
+        super(0, imagenes,anp,alp);
         this.vidaActual = vida;
         pts=100;
         velocidad = 5;
@@ -26,7 +26,7 @@ public class Boss extends Enemigo{
         tframe = 0;
         tickFrame = 150;
         velMax = 5;
-        Py = (JuegoView.getScreenHeight() / 3);
+        Py = (alp / 3);
         Log.i("enemigo", "Enemigo1: "+Py);
         lootChance=100;
         int randaux= rand.nextInt(101);

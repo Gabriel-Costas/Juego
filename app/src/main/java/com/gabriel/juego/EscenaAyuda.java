@@ -37,14 +37,29 @@ public class EscenaAyuda extends Escena{
 //        }
 //    }
 
+    /**
+     * Setter del contexto de la aplicación
+     * @param context Contexto de la aplicación
+     */
     public void setContext(Context context) {
         this.context = context;
     }
 
+    /**
+     * Getter del contexto de la aplicación
+     * @return Contexto de la aplicación
+     */
     public Context getContext() {
         return context;
     }
 
+    /**
+     * Constructor de la escena
+     * @param context Contexto de la aplicación
+     * @param width Ancho de la pantalla
+     * @param height Alto de la pantalla
+     * @param numEscena Codigo de la escena
+     */
     public EscenaAyuda(Context context, int width, int height, int numEscena) {
 
         super(context, width, height, numEscena); Log.i("ayuda", "" );
@@ -55,6 +70,9 @@ public class EscenaAyuda extends Escena{
 
     }
 
+    /**
+     * Carga las imagenes del menú de ayuda
+     */
     public void imagenesAyuda() {
 
         if (idioma) {
@@ -83,11 +101,19 @@ public class EscenaAyuda extends Escena{
         //ayuda5=Bitmap.createScaledBitmap(ayuda5,width,heigth,true);
     }
 
+    /**
+     * Dibuja en pantalla los elementos necesarios indicados
+     * @param c Canvas sobre el que dibujar
+     */
     public void dibujar(Canvas c) {
         Log.i("imagen", "" + imagen);
         c.drawBitmap(pantallasAyuda[imagen], width, heigth, null);
     }
 
+    /**
+     * Avanza las imagenes de ayuda
+     * @return true si no hay más imagenes que mostrar
+     */
     public boolean siguiente() {
         if (this.imagen >= pantallasAyuda.length - 1) {
             return false;
@@ -99,6 +125,11 @@ public class EscenaAyuda extends Escena{
 
     }
 
+    /**
+     * Gestiona eventos de toque en pantalla
+     * @param event tipo de evento a gestionar
+     * @return Devuelve el número de escena
+     */
     @Override
     int onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
