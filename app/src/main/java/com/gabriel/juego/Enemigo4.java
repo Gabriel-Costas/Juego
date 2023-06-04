@@ -10,6 +10,9 @@ import java.util.Random;
  */
 public class Enemigo4 extends Enemigo {
 
+    /**
+     * Generador de numero aleatorio
+     */
     Random rand = new Random();
 
     /**

@@ -10,12 +10,33 @@ import android.graphics.Rect;
  * Gestion de los elementos tipo boton
  */
 public class Boton {
+    /**
+     * Nombre del boton
+     */
     String nombre;
+    /**
+     * Imagen del boton
+     */
     Bitmap imgBoton;
+    /**
+     * Ancho del boton
+     */
     int Sx;
+    /**
+     * Alto del boton
+     */
     int Sy;
+    /**
+     * Rectangulo para Gestionar pulsaciones
+     */
     Rect hitbox;
+    /**
+     * Dibuja la hitbox
+     */
     Paint p;
+    /**
+     * Activa o desactiva el boton
+     */
     boolean setEnabled =true;
 
     /**

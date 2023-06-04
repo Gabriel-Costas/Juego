@@ -13,24 +13,90 @@ import android.util.Log;
 import java.io.IOException;
 import java.io.InputStream;
 
-// TODO AL DEJAR ATAQUE PULSADO: ATAQUES LOCOS
 public class Personaje {
-    int color = Color.GREEN;
-    int Px, Py, bossCheck;
 
+    /**
+     * Posicion en X e Y del personaje
+     */
+    int Px, Py;
+    /**
+     * Comprueba si puede hacer spawn de un enemigo tipo boss
+     */
+    int bossCheck;
+
+    /**
+     * Puntuacion del personaje
+     */
     static int pts = 0;
-    int vidas, vidaActual = 5, pociones = 1, maxPociones = 3;
+    /**
+     * Vida total y actual del jugador
+     */
+    int vidas, vidaActual = 5;
+    /**
+     * Cantidad inicial y maxima de pociones del jugador
+     */
+    int pociones=1, maxPociones=3;
+    /**
+     * Hitboxes del perosnaje
+     */
     public Rect hitbox, hurtbox, hbCentro;
+    /**
+     * Colores de las hitboxes
+     */
     Paint p, p2, p3;
+    /**
+     * Posicion de la imagen actual del vector de imagenes de movimiento
+     */
     public int numFrame = 0;
+    /**
+     * Comprueba si el personaje cambia de sentido
+     */
     boolean cambia = false;
+    /**
+     * Comprueba hacia que lado mira el perosnaje
+     */
     boolean derecha;
-    int tickFrame = 150, tickvida = 1500;
-    long tframe = 0, tvida = 0;
+    /**
+     * Velocidad de cambio de frame de movimiento
+     */
+    int tickFrame = 200;
+    /**
+     * Inicia la cuenta para el cambio de frame
+     */
+    long tframe = 0;
+    /**
+     * Tiempo de inmunidad al recibir daño
+     */
+    int tickvida=1500;
+    /**
+     * Inicia la cuenta de inmunidad
+     */
+    long tvida=0;
+
+    /**
+     * Comprueba si el personaje esta quieto
+     */
     boolean parado = true;
+    /**
+     * Ancho y alto de la pantalla
+     */
     int anchoP, altoP;
-    boolean ataca = false, vivo = true;
+    /**
+     * Comprueba si el personaje esta atacando
+     */
+    boolean ataca = false;
+    /**
+     * Comprueba si el personaje esta vivo actualmente
+     */
+    boolean vivo = true;
+    /**
+     * vectores de imagenes de movimiento del personaje
+     */
     public Bitmap[] mcRunCyclei, mcRunCycled, mcAtk1d, mcAtk2d, mcAtk3d, mcAtk1i, mcAtk2i, mcAtk3i, frames, parod, paroi;
+    /**
+     * Contexto de la aplicacion
+     * Contexto de la aplicacion
+     */
     Context context;
 
 

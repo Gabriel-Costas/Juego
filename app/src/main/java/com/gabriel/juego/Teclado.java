@@ -14,10 +14,21 @@ import java.util.ArrayList;
  */
 public class Teclado extends Boton{
 
-    int coorX=0;
+    /**
+     * Coleccion de objetos tipo boton que representan las letras del teclado
+     */
     ArrayList<Boton> botones;
+    /**
+     * Imagen de los caracteres del teclado
+     */
     Bitmap imagen;
+    /**
+     * Contexto de la aplicacion
+     */
     Context context;
+    /**
+     * Alto y ancho de la pantalla
+     */
     int altoPantalla,anchopantalla;
 
     /**

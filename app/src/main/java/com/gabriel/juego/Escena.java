@@ -17,13 +17,37 @@ import java.io.InputStream;
  */
 public class Escena {
 
+    /**
+     * Codigo de la escena actual
+     */
     int numEscena=-1;
+    /**
+     * Alto de la pantalla
+     */
     int altoPantalla;
+    /**
+     * Ancho de la pantalla
+     */
     int anchoPantalla;
+    /**
+     * Contexto de la aplicación
+     */
     Context context;
+    /**
+     * Dibuja el boton de regreso a la pantalla de menu principal
+     */
     Boton btnHome;
+    /**
+     * Color de las hitboxes
+     */
     Paint p;
+    /**
+     * Dibuja hitboxes
+     */
     Rect menu;
+    /**
+     * Gestiona la fuente para escritura en la escena
+     */
     Fuente fuente;
 
     /**

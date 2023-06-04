@@ -16,12 +16,66 @@ import java.util.Locale;
  * Gestiona los elementos escena
  */
 public class EscenaConfig extends Escena {
+
+    /**
+     * Codigo de la escena actual
+     */
     int numEscena = 2;
+    /**
+     * Duración de la vibración
+     */
     int tiempoVibra;
-    Bitmap fondoOpciones, panelImg, chkbImg1,chkbImg0, esp, eng, imgHelp;
+    /**
+     * Imagen de fondo de la escena
+     */
+    Bitmap fondoOpciones;
+    /**
+     * Imagen del panel de texto
+     */
+    Bitmap panelImg;
+    /**
+     * Imagen Checkbox de vibracion desmarcado
+     */
+    Bitmap chkbImg0;
+    /**
+     * Imagen checkbox de vibración marcado
+     */
+    Bitmap chkbImg1;
+    /**
+     * Imagen bandera española
+     */
+    Bitmap esp;
+    /**
+     * Imagen bandera Inglesa
+     */
+    Bitmap eng;
+    /**
+     * Imagen boton de ayuda
+     */
+    Bitmap imgHelp;
+    /**
+     * Gestiona el Fondo de la escena
+     */
     Fondo opciones;
-    Boton btnCheckBox, btnHelp, btnLang;
+    /**
+     * Gestiona la seleccion de la vibracion
+     */
+    Boton btnCheckBox;
+    /**
+     * Muestra las imagenes del vector de imagenes de ayuda
+     */
+    Boton btnHelp;
+    /**
+     * Gestiona la selección de idioma
+     */
+    Boton btnLang;
+    /**
+     * Checkea la seleccion de idioma y vibracion actuales
+     */
     boolean idioma, vibracion;
+    /**
+     * Gestor de vibrador
+     */
     Vibrator vibrator;
 
     /**
@@ -110,7 +164,6 @@ public class EscenaConfig extends Escena {
 
                 if (btnLang.hitbox.contains(x, y)) {
                     Log.i("Coor", "Coordenadas Idioma: "+btnLang.Sx+" "+btnLang.Sy);
-                    //Toast.makeText(context, "idioma", Toast.LENGTH_SHORT).show();
                     idioma = Records.leeboolean("idioma", context);
                     idioma = !idioma;
                     if (idioma) {
@@ -129,7 +182,6 @@ public class EscenaConfig extends Escena {
                           btnCheckBox.imgBoton = chkbImg1;
                         tiempoVibra = 100;
                         vibrator.vibrate(tiempoVibra);
-                        //btnCheckBox.setEnabled = true;
                         vibracion = true;
                     } else {
                         tiempoVibra = 0;

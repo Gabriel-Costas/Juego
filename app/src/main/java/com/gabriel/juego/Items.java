@@ -13,11 +13,40 @@ import java.util.ArrayList;
  * Gestion de los items
  */
 public class Items {
+
+    /**
+     * Imagen del item
+     */
     Bitmap imagen;
+    /**
+     * Hitbox del item
+     */
     Rect hitbox;
-    int Px, pts, altopantalla;
+
+    /**
+     * posicion horizontal del item en pantalla
+     */
+    int Px;
+    /**
+     * Puntos que añade el item al coleccionarlo
+     */
+    int pts;
+    /**
+     * Alto de la pantalla
+     */
+    int altopantalla;
+
+    /**
+     * Posicion vertical del item en pantalla
+     */
     int Py = (altopantalla / 10) * 8;
+    /**
+     * Velocidad del item al moverse la pantalla
+     */
     int velo = 40, veloDibujo = 0;
+    /**
+     * Color de la hitbox
+     */
     Paint p;
 
     /**
@@ -28,6 +57,7 @@ public class Items {
     public Items(int Px, Bitmap imagen, int altopantalla) {
         this.Px = Px;
         this.imagen = imagen;
+        this.altopantalla=altopantalla;
         p = new Paint();
         p.setColor(Color.TRANSPARENT);
         p.setStyle(Paint.Style.STROKE);

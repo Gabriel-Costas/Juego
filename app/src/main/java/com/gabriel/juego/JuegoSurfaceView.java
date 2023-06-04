@@ -22,17 +22,36 @@ import java.util.Locale;
 // TODO MOVER ESCENAS
 public class JuegoSurfaceView extends SurfaceView implements SurfaceHolder.Callback, SensorEventListener {
 
-    Vibrator vibrator;
+    /**
+     * Gestiona la escena actual
+     */
 
     Escena escenaActual;
-    private SurfaceHolder surfaceHolder; // Interfaz abstracta para manejar la superficie de dibujado
-    private Context context; // Contexto de la aplicación
+    /**
+     * Interfaz abstracta para manejar la superficie de dibujado
+     */
+    private SurfaceHolder surfaceHolder;
+    /**
+     * Contexto de la aplicacion
+     */
+    private Context context;
 
-
-    private int anchoPantalla = 1; // Ancho de la pantalla, su valor se actualiza en el método surfaceChanged
-    private int altoPantalla = 1; // Alto de la pantalla, su valor se actualiza en el método surfaceChanged
-    private Hilo hilo; // Hilo encargado de dibujar y actualizar la física
-    private boolean funcionando = false; // nuevoJuego = false; // vibracion, idioma; // Control del hilo
+    /**
+     * Ancho de la pantalla, su valor se actualiza en el método surfaceChanged
+     */
+    private int anchoPantalla = 1;
+    /**
+     * Alto de la pantalla, su valor se actualiza en el método surfaceChanged
+     */
+    private int altoPantalla = 1;
+    /**
+     * Hilo encargado de dibujar y actualizar la física
+     */
+    private Hilo hilo;
+    /**
+     * Control del hilo
+     */
+    private boolean funcionando = false;
 
 
 
@@ -121,17 +140,31 @@ public class JuegoSurfaceView extends SurfaceView implements SurfaceHolder.Callb
 
     }
 
+    /**
+     * Gestiona cambios en el sensor
+     * @param sensorEvent the {@link android.hardware.SensorEvent SensorEvent}.
+     */
     @Override
     public void onSensorChanged(SensorEvent sensorEvent) {
 
     }
 
+    /**
+     * Gestiona cambios de precision del sensor
+     * @param sensor
+     * @param i The new accuracy of this sensor, one of
+     *         {@code SensorManager.SENSOR_STATUS_*}
+     */
     @Override
     public void onAccuracyChanged(Sensor sensor, int i) {
 
     }
 
 
+    /**
+     * Gestor de cambio de escenas
+     * @param nuevaEscena Codigo de la escena a la que se desea cambiar
+     */
     public void cambiaEscena(int nuevaEscena) { //TODO cambia escena
         if (escenaActual.numEscena != nuevaEscena) {
             escenaActual.onEscenaDestroyed();

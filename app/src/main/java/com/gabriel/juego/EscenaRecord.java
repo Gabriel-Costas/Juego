@@ -18,22 +18,67 @@ import java.util.ArrayList;
  * Gestiona los elementos escena
  */
 public class EscenaRecord extends Escena {
+
+    /**
+     * Alto y ancho de la pantalla
+     */
     int altoPantalla, anchoPantalla;
+    /**
+     * Contexto de la aplicacion
+     */
     Context context;
+    /**
+     * Cadena de nombre para el grabado de record
+     */
     String recordNombre = "";
+    /**
+     * Codigo del record
+     */
     int claveRecord;
-    Canvas c;
-    // int pts=Personaje.pts;
-    Bitmap fondoMuerte, btnBorrar, btnConfirmar;
+    /**
+     * Imagen de fondo de la escena
+     */
+    Bitmap fondoMuerte;
+    /**
+     * Imagenes para los botones de la escena
+     */
+    Bitmap btnBorrar, btnConfirmar;
+    /**
+     * Gestiona el fondo de la escena
+     */
     Fondo go;
+    /**
+     * Gestiona y dibuja el teclado personalizado
+     */
     Teclado teclado;
+    /**
+     * Gestor de vibracion
+     */
     Vibrator vibrator;
+    /**
+     * Dibuja los botones de la escena
+     */
     Boton btnBorra, btnConf;
+    /**
+     * Checkea si se produce un nuevo record
+     */
     Boolean introducirDatos = true;
+    /**
+     * Gestion de grabacion de records con libreria añadida
+     */
     Gson gson;
+    /**
+     * Coleccion de nombres de los records
+     */
     ArrayList<String> nombres;
+    /**
+     * Coleccion de puntuaciones de los records
+     */
     ArrayList<Integer> puntuaciones;
 
+    /**
+     * Codigo de la escena
+     */
     int numEscena = 3;
 
     /**

@@ -10,9 +10,21 @@ import android.util.Log;
  */
 public class Fondo {
 
+    /**
+     * posiccion de inicio y final de una imagen en su posicion x (ancho)
+     */
     public int x, x2;
+    /**
+     * Imagen para el fondo
+     */
     public Bitmap imagen;
+    /**
+     * Velocidades para el control de movimiento del fondo
+     */
     public int velo, veloDibujo = 0;
+    /**
+     * Ancho de la pantalla
+     */
     int anchoPantalla;
 
     /**

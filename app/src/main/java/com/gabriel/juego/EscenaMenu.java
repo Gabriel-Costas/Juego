@@ -8,15 +8,56 @@ import android.os.Vibrator;
 import android.view.MotionEvent;
 
 /**
- * Gestiona los elementos escena
+ * Gestiona el menu principal
  */
 public class EscenaMenu extends Escena{
+    /**
+     * Codigo identificador de la escena actual
+     */
     int numEscena=0;
-    Boton btnPlay, btnConfig,btnCreditos;
-    Bitmap playImg, config, imgCreditos, fondoMenu;
+    /**
+     * Dibuja el botón de play
+     */
+    Boton btnPlay;
+    /**
+     * dibuja el configuracion
+     */
+    Boton btnConfig;
+    /**
+     * Dibuja el botón creditos
+     */
+    Boton btnCreditos;
+    /**
+     * Imagen de btnPlay
+     */
+    Bitmap playImg;
+    /**
+     * Imagen de btnConfig
+     */
+    Bitmap config;
+    /**
+     * Imagen de btnCreditos
+     */
+    Bitmap imgCreditos;
+    /**
+     * Imagen de fondo de la pantalla
+     */
+    Bitmap fondoMenu;
+    /**
+     * Gestiona el fondo de la pantalla
+     */
     Fondo fondoMenuP;
+    /**
+     * Gestiona la vibracion en la pantalla
+     */
     Vibrator vibrator;
+    /**
+     * Duracion de la vibración en ms
+     */
     int tiempoVibra=100;
+    /**
+     * Checkea el comienzo de una partida nueva
+     */
     boolean nuevoJuego = false;
 
     /**
@@ -84,7 +125,6 @@ public class EscenaMenu extends Escena{
         if (btnPlay.hitbox.contains(x, y)) {
             vibrator.vibrate(tiempoVibra);
             nuevoJuego = true;
-//            juegoReset();
             return 2;
         }
 

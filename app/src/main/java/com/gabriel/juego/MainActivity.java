@@ -13,7 +13,14 @@ import android.view.View;
 import android.view.WindowManager;
 
 public class MainActivity extends AppCompatActivity {
+
+    /**
+     * Reproductor de sonidos
+     */
     public MediaPlayer mediaPlayer;
+    /**
+     * Gestor de sonidos
+     */
     public AudioManager audioManager;
 
     /**
@@ -23,9 +30,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        JuegoView JV=new JuegoView(this);
         JuegoSurfaceView JV=new JuegoSurfaceView(this);
-        //SurfaceViewTeclado svt=new SurfaceViewTeclado(this);
         JV.setKeepScreenOn(true);
         setContentView(JV);
         audioManager=(AudioManager)getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
@@ -62,4 +67,6 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide(); // se oculta la barra de ActionBar
         super.onResume();
     }
+
+
 }

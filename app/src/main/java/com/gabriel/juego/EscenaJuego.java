@@ -24,40 +24,143 @@ import java.util.Random;
  * Gestiona los elementos escena. Implementa el control del sensor
  */
 public class EscenaJuego extends Escena implements SensorEventListener {
+
+    /**
+     * Gestion de sensores
+     */
     SensorManager sensorManager;
+    /**
+     * Sensor de claridad
+     */
     Sensor sensorLuz;
+    /**
+     * Codigo de la escena
+     */
     int numEscena = 1;
-    Bitmap btnAtacar, btnPocion, btnNoPocion, btnIzda, btnDer, spriteMC, vida, pocionDrop, btnContinuar;
+    /**
+     * Imagen para el boton de ataque
+     */
+    Bitmap btnAtacar;
+    /**
+     * Imagen para el boton de pocion cuando se posee una pocion
+     */
+    Bitmap btnPocion;
+    /**
+     * Imagen para el boton de pocion cuando no quedan pociones
+     */
+    Bitmap btnNoPocion;
+    /**
+     * Imagen para los botones de movimiento
+     */
+    Bitmap btnIzda, btnDer;
+    /**
+     * Imagen para el indicador de vida del perosnaje
+     */
+    Bitmap vida;
+    /**
+     * Imagen del item pocion
+     */
+    Bitmap pocionDrop;
+    /**
+     * Imagen para el boton de continuar
+     */
+    Bitmap btnContinuar;
+    /**
+     * Gestiona los botones de la pantalla
+     */
     Boton btnAtk, btnPot, btnR, btnL, btnCont;
+    /**
+     * Vector de imagenes de vida del personaje
+     */
     Bitmap[]  mcVidas;
-    Paint boton;
+    /**
+     * Crea un personaje
+     */
     Personaje mc;
+    /**
+     * ancho y alto de la pantalla
+     */
     int anp, alp;
+    /**
+     * Checkea el lado hacia el que mira el personaje
+     */
     static boolean lado;
+    /**
+     * Numero de combo para cambio de animacion de ataque
+     */
     static int combo = 0;
+    /**
+     * Gestiona las imagenes de fondo de la escena para el efecto parallax
+     */
     Fondo capa1, capa2, capa3, capa4;
+    /**
+     * Gestiona efectos de sonido
+     */
     public SoundPool efectos;
+    /**
+     * Efecto de sonido
+     */
     public Integer sonidoWoosh;
+    /**
+     * Coleccion de objetos enemigo
+     */
     ArrayList<Enemigo> enemigo = new ArrayList<>();
+    /**
+     * Inicio del controlador de tiempo de spawn enemigo
+     */
     long tiempoGenera = 0;
+    /**
+     * Fin del controlador de tiempo de spawn enemigo
+     */
     int tickGenera = 2000;
+    /**
+     * Gestor de vibrador
+     */
     Vibrator vibrator;
+    /**
+     * Duracion de la vibracion
+     */
     int tiempoVibra = 100;
+    /**
+     * Checkea si la partida empieza para el reseteo del juego
+     */
     boolean nuevoJuego = true;
+    /**
+     * Checkea si la partida acaba
+     */
     boolean jugando = true;
+    /**
+     * COleccion de objetos tipo Item
+     */
     ArrayList<Items> items = new ArrayList<>();
+    /**
+     * Dibuja efectos de transicion de la escena
+     */
     Paint fade, fadeOut;
+    /**
+     * Comienzo de transicion
+     */
     long tFade = 0;
+    /**
+     * Fin de transicion
+     */
     int tickFade = 20;
+    /**
+     * Velocidad de la transicion
+     */
     int veloFade = -5;
-    boolean prueba = false;
+    /**
+     * Gestor de sonido
+     */
     public AudioManager audioManager;
-    private Bitmap bitmapFondo, fondoMedio, fondoCerca, fondoLuz; // Imagen de fondo
-    Bitmap[] enemigo1;
-    Bitmap[] enemigo2;
-    Bitmap[] enemigo3;
-    Bitmap[] enemigo4;
-    Bitmap[] boss;
+    /**
+     * Imagenes de fondo de la escena
+     */
+    private Bitmap bitmapFondo, fondoMedio, fondoCerca, fondoLuz;
+    /**
+     * Vectores de imagenes de los enemigos
+     */
+    Bitmap[] enemigo1, enemigo2,enemigo3,enemigo4,boss;
 
     /**
      *
@@ -291,16 +394,11 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                         jugando = true;
                     }
                 } else if (!jugando && !mc.vivo) {
-                    Log.i("chocolate", "WTF BRO WTF");
                     if (System.currentTimeMillis() - tFade >= tickFade && fadeOut.getAlpha() < 255) {
-                        Log.i("cafe", "pasa if");
                         fadeOut.setAlpha(fadeOut.getAlpha() - veloFade);
 
                         tFade = System.currentTimeMillis();
 
-                    } else {
-                        Log.i("cafe", "pasa else");
-                        prueba = true;
                     }
                 }
             }

@@ -15,13 +15,33 @@ import java.io.InputStream;
  */
 public class EscenaAyuda extends Escena{
 
+    /**
+     * Codigo de la escena actual
+     */
     int numEscena=6;
+    /**
+     * Contexto de la aplicación
+     */
     private Context context;
+    /**
+     * Alto y ancho de la pantalla
+     */
     public int heigth, width;
-    public Canvas canv;
+    /**
+     * Imagenes del tutorial
+     */
     public Bitmap ayuda1, ayuda2, ayuda3, ayuda4, ayuda5;
+    /**
+     * Vector de imagenes para el tutorial
+     */
     Bitmap[] pantallasAyuda;
+    /**
+     * Check de idioma seleccionado
+     */
     boolean idioma;
+    /**
+     * Imagen de tutorial actual
+     */
     int imagen = 0;
 
     /**
@@ -81,11 +101,6 @@ public class EscenaAyuda extends Escena{
         pantallasAyuda[2] = ayuda3;
         pantallasAyuda[3] = ayuda4;
         pantallasAyuda[4] = ayuda5;
-        //ayuda1=Bitmap.createScaledBitmap(ayuda1,width,heigth,true);
-        //ayuda2=Bitmap.createScaledBitmap(ayuda2,width,heigth,true);
-        //ayuda3=Bitmap.createScaledBitmap(ayuda3,width,heigth,true);
-        //ayuda4=Bitmap.createScaledBitmap(ayuda4,width,heigth,true);
-        //ayuda5=Bitmap.createScaledBitmap(ayuda5,width,heigth,true);
     }
 
     /**

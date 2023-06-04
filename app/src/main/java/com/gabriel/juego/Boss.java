@@ -10,6 +10,9 @@ import java.util.Random;
  */
 public class Boss extends Enemigo{
 
+    /**
+     * Generador de numero aleatorio
+     */
     Random rand=new Random();
 
     /**

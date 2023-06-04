@@ -10,7 +10,13 @@ import java.util.Locale;
  * Gestion de la fuente
  */
 public class Fuente {
+    /**
+     * Imagen de elementos de la fuente
+     */
     Bitmap fuente;
+    /**
+     * Coleccion de imagenes de la fuente con su correspondiente caracter asociado
+     */
     static HashMap<String, Bitmap> letras = new HashMap<>();
 
     /**

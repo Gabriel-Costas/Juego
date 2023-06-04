@@ -10,8 +10,18 @@ import android.view.MotionEvent;
  * Gestiona los elementos escena
  */
 public class EscenaCreditos extends Escena {
+
+    /**
+     * Codigo de la escena actual
+     */
     int numEscena=3;
+    /**
+     * Imagen de fondo de la escena
+     */
     Bitmap fondoMenu;
+    /**
+     * Gestion del fondo de la escena
+     */
     Fondo fondoMenuP;
 
 
