@@ -13,31 +13,31 @@ public class Boton {
     /**
      * Nombre del boton
      */
-    String nombre;
+    public String nombre;
     /**
      * Imagen del boton
      */
-    Bitmap imgBoton;
+    public Bitmap imgBoton;
     /**
      * Ancho del boton
      */
-    int Sx;
+    public int Sx;
     /**
      * Alto del boton
      */
-    int Sy;
+    public int Sy;
     /**
      * Rectangulo para Gestionar pulsaciones
      */
-    Rect hitbox;
+    public Rect hitbox;
     /**
      * Dibuja la hitbox
      */
-    Paint p;
+    public Paint p;
     /**
      * Activa o desactiva el boton
      */
-    boolean setEnabled =true;
+    public boolean setEnabled =true;
 
     /**
      * Constructor vacío de elementos botón

@@ -13,7 +13,7 @@ public class Enemigo3 extends Enemigo{
     /**
      * Generador de numero aleatorio
      */
-    Random rand=new Random();
+    public Random rand=new Random();
 
     /**
      * Constructor de enemigo tipo 3

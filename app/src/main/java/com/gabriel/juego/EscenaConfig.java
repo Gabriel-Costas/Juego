@@ -20,63 +20,63 @@ public class EscenaConfig extends Escena {
     /**
      * Codigo de la escena actual
      */
-    int numEscena = 2;
+    public int numEscena = 2;
     /**
      * Duración de la vibración
      */
-    int tiempoVibra;
+    public int tiempoVibra;
     /**
      * Imagen de fondo de la escena
      */
-    Bitmap fondoOpciones;
+    public Bitmap fondoOpciones;
     /**
      * Imagen del panel de texto
      */
-    Bitmap panelImg;
+    public Bitmap panelImg;
     /**
      * Imagen Checkbox de vibracion desmarcado
      */
-    Bitmap chkbImg0;
+    public Bitmap chkbImg0;
     /**
      * Imagen checkbox de vibración marcado
      */
-    Bitmap chkbImg1;
+    public Bitmap chkbImg1;
     /**
      * Imagen bandera española
      */
-    Bitmap esp;
+    public Bitmap esp;
     /**
      * Imagen bandera Inglesa
      */
-    Bitmap eng;
+    public Bitmap eng;
     /**
      * Imagen boton de ayuda
      */
-    Bitmap imgHelp;
+    public Bitmap imgHelp;
     /**
      * Gestiona el Fondo de la escena
      */
-    Fondo opciones;
+    public Fondo opciones;
     /**
      * Gestiona la seleccion de la vibracion
      */
-    Boton btnCheckBox;
+    public Boton btnCheckBox;
     /**
      * Muestra las imagenes del vector de imagenes de ayuda
      */
-    Boton btnHelp;
+    public Boton btnHelp;
     /**
      * Gestiona la selección de idioma
      */
-    Boton btnLang;
+    public Boton btnLang;
     /**
      * Checkea la seleccion de idioma y vibracion actuales
      */
-    boolean idioma, vibracion;
+    public boolean idioma, vibracion;
     /**
      * Gestor de vibrador
      */
-    Vibrator vibrator;
+    public Vibrator vibrator;
 
     /**
      *

@@ -14,51 +14,51 @@ public class EscenaMenu extends Escena{
     /**
      * Codigo identificador de la escena actual
      */
-    int numEscena=0;
+    public int numEscena=0;
     /**
      * Dibuja el botón de play
      */
-    Boton btnPlay;
+    public Boton btnPlay;
     /**
      * dibuja el configuracion
      */
-    Boton btnConfig;
+    public Boton btnConfig;
     /**
      * Dibuja el botón creditos
      */
-    Boton btnCreditos;
+    public Boton btnCreditos;
     /**
      * Imagen de btnPlay
      */
-    Bitmap playImg;
+    public Bitmap playImg;
     /**
      * Imagen de btnConfig
      */
-    Bitmap config;
+    public Bitmap config;
     /**
      * Imagen de btnCreditos
      */
-    Bitmap imgCreditos;
+    public Bitmap imgCreditos;
     /**
      * Imagen de fondo de la pantalla
      */
-    Bitmap fondoMenu;
+    public Bitmap fondoMenu;
     /**
      * Gestiona el fondo de la pantalla
      */
-    Fondo fondoMenuP;
+    public Fondo fondoMenuP;
     /**
      * Gestiona la vibracion en la pantalla
      */
-    Vibrator vibrator;
+    public Vibrator vibrator;
     /**
      * Duracion de la vibración en ms
      */
-    int tiempoVibra=100;
+    public int tiempoVibra=100;
     /**
      * Checkea el comienzo de una partida nueva
      */
-    boolean nuevoJuego = false;
+    public boolean nuevoJuego = false;
 
     /**
      *

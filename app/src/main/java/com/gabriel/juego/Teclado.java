@@ -17,19 +17,19 @@ public class Teclado extends Boton{
     /**
      * Coleccion de objetos tipo boton que representan las letras del teclado
      */
-    ArrayList<Boton> botones;
+    public ArrayList<Boton> botones;
     /**
      * Imagen de los caracteres del teclado
      */
-    Bitmap imagen;
+    public Bitmap imagen;
     /**
      * Contexto de la aplicacion
      */
-    Context context;
+    public Context context;
     /**
      * Alto y ancho de la pantalla
      */
-    int altoPantalla,anchopantalla;
+    public int altoPantalla,anchopantalla;
 
     /**
      * Constructor del teclado

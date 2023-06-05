@@ -17,35 +17,35 @@ public class Enemigo {
     /**
      * Ancho y alto del enemigo
      */
-    int Px, Py;
+    public int Px, Py;
     /**
      * Puntos que da el enemigo al ser eliminado
      */
-    int pts;
+    public int pts;
     /**
      * Velocidad de movimiento
      */
-    int velocidad;
+    public int velocidad;
     /**
      * Puntos de ataque actuales y originales del enemigo
      */
-    int ataque, ataqueBase;
+    public int ataque, ataqueBase;
     /**
      * Ancho y alto de la pantalla
      */
-    int anchopantalla, altopantalla;
+    public int anchopantalla, altopantalla;
     /**
      * Vida actual y original del enemigo
      */
-    int vida, vidaActual;
+    public int vida, vidaActual;
     /**
      * Numero identificador del tipo de enemigo
      */
-    int tipo;
+    public int tipo;
     /**
      * Probabilidad de que el enemigo suelte un objeto al morir
      */
-    int lootChance;
+    public int lootChance;
     /**
      * Imagen del enemigo
      */
@@ -57,11 +57,11 @@ public class Enemigo {
     /**
      * Color de la hitbox
      */
-    Paint p;
+    public Paint p;
     /**
      * Coleccion de imagenes del enemigo cuando mira hacia los lados
      */
-    Bitmap[] imagenes, imagenesDerecha, imagenesIzquierda;
+    public Bitmap[] imagenes, imagenesDerecha, imagenesIzquierda;
     /**
      * posicion de la imagen en el vector para simular movimiento
      */
@@ -69,19 +69,19 @@ public class Enemigo {
     /**
      * Tiempo inicial para el cambio de imagenes de movimiento
      */
-    long tframe = 0;
+    public long tframe = 0;
     /**
      * Tiempo al que se produce el cambio de la imagen
      */
-    int tickFrame = 150;
+    public int tickFrame = 150;
     /**
      * Velocidad de movimiento del enemigo
      */
-    int velMax = 10;
+    public int velMax = 10;
     /**
      * Checkea si el enemigo actual suelta un objeto al morir
      */
-    boolean drop = false;
+    public boolean drop = false;
 
 
     /**

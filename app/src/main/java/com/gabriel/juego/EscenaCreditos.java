@@ -14,15 +14,15 @@ public class EscenaCreditos extends Escena {
     /**
      * Codigo de la escena actual
      */
-    int numEscena=3;
+    public int numEscena=3;
     /**
      * Imagen de fondo de la escena
      */
-    Bitmap fondoMenu;
+    public Bitmap fondoMenu;
     /**
      * Gestion del fondo de la escena
      */
-    Fondo fondoMenuP;
+    public Fondo fondoMenuP;
 
 
     /**

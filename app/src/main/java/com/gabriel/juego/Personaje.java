@@ -18,24 +18,24 @@ public class Personaje {
     /**
      * Posicion en X e Y del personaje
      */
-    int Px, Py;
+    public int Px, Py;
     /**
      * Comprueba si puede hacer spawn de un enemigo tipo boss
      */
-    int bossCheck;
+    public int bossCheck;
 
     /**
      * Puntuacion del personaje
      */
-    static int pts = 0;
+    public static int pts = 0;
     /**
      * Vida total y actual del jugador
      */
-    int vidas, vidaActual = 5;
+    public int vidas, vidaActual = 5;
     /**
      * Cantidad inicial y maxima de pociones del jugador
      */
-    int pociones=1, maxPociones=3;
+    public int pociones=1, maxPociones=3;
     /**
      * Hitboxes del perosnaje
      */
@@ -43,7 +43,7 @@ public class Personaje {
     /**
      * Colores de las hitboxes
      */
-    Paint p, p2, p3;
+    public Paint p, p2, p3;
     /**
      * Posicion de la imagen actual del vector de imagenes de movimiento
      */
@@ -51,44 +51,44 @@ public class Personaje {
     /**
      * Comprueba si el personaje cambia de sentido
      */
-    boolean cambia = false;
+    public boolean cambia = false;
     /**
      * Comprueba hacia que lado mira el perosnaje
      */
-    boolean derecha;
+    public boolean derecha;
     /**
      * Velocidad de cambio de frame de movimiento
      */
-    int tickFrame = 200;
+    public int tickFrame = 200;
     /**
      * Inicia la cuenta para el cambio de frame
      */
-    long tframe = 0;
+    public long tframe = 0;
     /**
      * Tiempo de inmunidad al recibir daño
      */
-    int tickvida=1500;
+    public int tickvida=1500;
     /**
      * Inicia la cuenta de inmunidad
      */
-    long tvida=0;
+    public long tvida=0;
 
     /**
      * Comprueba si el personaje esta quieto
      */
-    boolean parado = true;
+    public boolean parado = true;
     /**
      * Ancho y alto de la pantalla
      */
-    int anchoP, altoP;
+    public int anchoP, altoP;
     /**
      * Comprueba si el personaje esta atacando
      */
-    boolean ataca = false;
+    public boolean ataca = false;
     /**
      * Comprueba si el personaje esta vivo actualmente
      */
-    boolean vivo = true;
+    public boolean vivo = true;
     /**
      * vectores de imagenes de movimiento del personaje
      */
@@ -97,7 +97,7 @@ public class Personaje {
      * Contexto de la aplicacion
      * Contexto de la aplicacion
      */
-    Context context;
+    public  Context context;
 
 
     /**

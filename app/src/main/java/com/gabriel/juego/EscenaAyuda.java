@@ -18,7 +18,7 @@ public class EscenaAyuda extends Escena{
     /**
      * Codigo de la escena actual
      */
-    int numEscena=6;
+    public int numEscena=6;
     /**
      * Contexto de la aplicación
      */
@@ -34,15 +34,15 @@ public class EscenaAyuda extends Escena{
     /**
      * Vector de imagenes para el tutorial
      */
-    Bitmap[] pantallasAyuda;
+    public Bitmap[] pantallasAyuda;
     /**
      * Check de idioma seleccionado
      */
-    boolean idioma;
+    public boolean idioma;
     /**
      * Imagen de tutorial actual
      */
-    int imagen = 0;
+    public int imagen = 0;
 
     /**
      * Setter del contexto de la aplicación

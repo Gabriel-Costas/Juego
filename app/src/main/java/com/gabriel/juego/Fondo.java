@@ -25,7 +25,7 @@ public class Fondo {
     /**
      * Ancho de la pantalla
      */
-    int anchoPantalla;
+    public int anchoPantalla;
 
     /**
      * Constructor de elemento fondo

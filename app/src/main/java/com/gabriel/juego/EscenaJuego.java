@@ -28,71 +28,76 @@ public class EscenaJuego extends Escena implements SensorEventListener {
     /**
      * Gestion de sensores
      */
-    SensorManager sensorManager;
+    public SensorManager sensorManager;
     /**
      * Sensor de claridad
      */
-    Sensor sensorLuz;
+    public Sensor sensorLuz;
+
+    /**
+     * Sensor de movimiento
+     */
+    public Sensor sensorAcelerometro;
     /**
      * Codigo de la escena
      */
-    int numEscena = 1;
+    public int numEscena = 1;
     /**
      * Imagen para el boton de ataque
      */
-    Bitmap btnAtacar;
+    public Bitmap btnAtacar;
     /**
      * Imagen para el boton de pocion cuando se posee una pocion
      */
-    Bitmap btnPocion;
+    public Bitmap btnPocion;
     /**
      * Imagen para el boton de pocion cuando no quedan pociones
      */
-    Bitmap btnNoPocion;
+    public Bitmap btnNoPocion;
     /**
      * Imagen para los botones de movimiento
      */
-    Bitmap btnIzda, btnDer;
+    public Bitmap btnIzda, btnDer;
     /**
      * Imagen para el indicador de vida del perosnaje
      */
-    Bitmap vida;
+    public Bitmap vida;
     /**
      * Imagen del item pocion
      */
-    Bitmap pocionDrop;
+    public Bitmap pocionDrop;
     /**
      * Imagen para el boton de continuar
      */
-    Bitmap btnContinuar;
+    public Bitmap btnContinuar;
     /**
      * Gestiona los botones de la pantalla
      */
-    Boton btnAtk, btnPot, btnR, btnL, btnCont;
+    public Boton btnAtk, btnPot, btnR, btnL, btnCont;
     /**
      * Vector de imagenes de vida del personaje
      */
-    Bitmap[]  mcVidas;
+    public Bitmap[]  mcVidas;
     /**
      * Crea un personaje
      */
-    Personaje mc;
+    public Personaje mc;
     /**
      * ancho y alto de la pantalla
      */
-    int anp, alp;
+    public int anp, alp;
     /**
      * Checkea el lado hacia el que mira el personaje
      */
-    static boolean lado;
+    public static boolean lado;
     /**
      * Numero de combo para cambio de animacion de ataque
      */
-    static int combo = 0;
+    public static int combo = 0;
     /**
      * Gestiona las imagenes de fondo de la escena para el efecto parallax
      */
-    Fondo capa1, capa2, capa3, capa4;
+    public Fondo capa1, capa2, capa3, capa4;
     /**
      * Gestiona efectos de sonido
      */
@@ -104,51 +109,70 @@ public class EscenaJuego extends Escena implements SensorEventListener {
     /**
      * Coleccion de objetos enemigo
      */
-    ArrayList<Enemigo> enemigo = new ArrayList<>();
+    public ArrayList<Enemigo> enemigo = new ArrayList<>();
     /**
      * Inicio del controlador de tiempo de spawn enemigo
      */
-    long tiempoGenera = 0;
+    public long tiempoGenera = 0;
     /**
      * Fin del controlador de tiempo de spawn enemigo
      */
-    int tickGenera = 2000;
+    public int tickGenera = 2000;
     /**
      * Gestor de vibrador
      */
-    Vibrator vibrator;
+    public  Vibrator vibrator;
     /**
      * Duracion de la vibracion
      */
-    int tiempoVibra = 100;
+    public int tiempoVibra = 100;
     /**
      * Checkea si la partida empieza para el reseteo del juego
      */
-    boolean nuevoJuego = true;
+    public boolean nuevoJuego = true;
     /**
      * Checkea si la partida acaba
      */
-    boolean jugando = true;
+    public boolean jugando = true;
     /**
      * COleccion de objetos tipo Item
      */
-    ArrayList<Items> items = new ArrayList<>();
+    public ArrayList<Items> items = new ArrayList<>();
     /**
      * Dibuja efectos de transicion de la escena
      */
-    Paint fade, fadeOut;
+    public Paint fade, fadeOut;
     /**
      * Comienzo de transicion
      */
-    long tFade = 0;
+    public long tFade = 0;
     /**
      * Fin de transicion
      */
-    int tickFade = 20;
+    public int tickFade = 20;
     /**
      * Velocidad de la transicion
      */
-    int veloFade = -5;
+    public int veloFade = -5;
+
+    /**
+     * Ultimo valor guardado para el eje x
+     */
+    public float lastX;
+    /**
+     * Ultimo valor guardado para el eje y
+     */
+    public float lastY;
+    /**
+     * Ultimo valor guardado para el eje z
+     */
+    public float lastZ;
+
+    /**
+     * Ultimo valor guardado para la actualización del acelerómetro
+     */
+    public long lastUpdate;
+
     /**
      * Gestor de sonido
      */
@@ -160,7 +184,12 @@ public class EscenaJuego extends Escena implements SensorEventListener {
     /**
      * Vectores de imagenes de los enemigos
      */
-    Bitmap[] enemigo1, enemigo2,enemigo3,enemigo4,boss;
+    public Bitmap[] enemigo1, enemigo2,enemigo3,enemigo4,boss;
+
+    /**
+     * Listener para el acelerometro
+     */
+    private SensorEventListener listenerAcelerometro;
 
     /**
      *
@@ -174,6 +203,44 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         super(context, anp, alp, numEscena);
         sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         sensorLuz = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        sensorAcelerometro = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
+        listenerAcelerometro = new SensorEventListener() {
+            @Override
+            public void onSensorChanged(SensorEvent event) {
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+                Log.i("Colacao","Vamos alla!");
+                Log.i("Colacao","" +  event.values[0]);
+                Log.i("Colacao","" +  event.values[1]);
+                Log.i("Colacao","" +  event.values[2]);
+                long currentTimeMillis = System.currentTimeMillis();
+
+                if (currentTimeMillis - lastUpdate > 200){
+                    lastUpdate = currentTimeMillis;
+                    float speed = x+y+z - lastX-lastY-lastZ;
+                    Log.i("Colacao","" +  speed);
+                    if (speed > 15 || speed < -15){
+
+                        Log.i("Colacao", "POCIONESSS");
+                        bebePocion();
+                    }
+                }
+
+                lastX = x;
+
+                lastY = y;
+
+                lastZ = z;
+            }
+
+            @Override
+            public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+            }
+        };
+
 
         this.numEscena = numEscena;
         this.anp = anp;
@@ -417,6 +484,9 @@ public class EscenaJuego extends Escena implements SensorEventListener {
         if (sensorLuz != null) {
             sensorManager.registerListener(this, sensorLuz, SensorManager.SENSOR_DELAY_GAME);
         }
+        if (sensorAcelerometro != null) {
+            sensorManager.registerListener(listenerAcelerometro, sensorAcelerometro, SensorManager.SENSOR_DELAY_NORMAL);
+        }
     }
 
     /**
@@ -535,12 +605,7 @@ public class EscenaJuego extends Escena implements SensorEventListener {
 
                 } else {
                     if (btnPot.hitbox.contains(x, y)) {
-                        mc.bebePocion();
-                        if (mc.pociones == 0) {
-                            btnPot.imgBoton = btnNoPocion;
-                        } else {
-                            btnPot.imgBoton = btnPocion;
-                        }
+                       this.bebePocion();
                     } else {
                         if (btnL.hitbox.contains(x, y)) {
                             Log.i("muevo", "onTouchEvent: ia");
@@ -610,6 +675,20 @@ public class EscenaJuego extends Escena implements SensorEventListener {
                 break;
         }
          return this.numEscena;
+    }
+
+    /**
+     * Gestiona el consumo de pociones
+     *
+     */
+    public void bebePocion () {
+        Log.i("Colacao", "Está vivoooooo");
+        mc.bebePocion();
+        if (mc.pociones == 0) {
+            btnPot.imgBoton = btnNoPocion;
+        } else {
+            btnPot.imgBoton = btnPocion;
+        }
     }
 
     /**

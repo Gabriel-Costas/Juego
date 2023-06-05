@@ -26,7 +26,7 @@ public class JuegoSurfaceView extends SurfaceView implements SurfaceHolder.Callb
      * Gestiona la escena actual
      */
 
-    Escena escenaActual;
+    public Escena escenaActual;
     /**
      * Interfaz abstracta para manejar la superficie de dibujado
      */

@@ -17,37 +17,37 @@ public class Items {
     /**
      * Imagen del item
      */
-    Bitmap imagen;
+    public Bitmap imagen;
     /**
      * Hitbox del item
      */
-    Rect hitbox;
+    public Rect hitbox;
 
     /**
      * posicion horizontal del item en pantalla
      */
-    int Px;
+    public int Px;
     /**
      * Puntos que añade el item al coleccionarlo
      */
-    int pts;
+    public int pts;
     /**
      * Alto de la pantalla
      */
-    int altopantalla;
+    public int altopantalla;
 
     /**
      * Posicion vertical del item en pantalla
      */
-    int Py = (altopantalla / 10) * 8;
+    public int Py;
     /**
      * Velocidad del item al moverse la pantalla
      */
-    int velo = 40, veloDibujo = 0;
+    public int velo = 40, veloDibujo = 0;
     /**
      * Color de la hitbox
      */
-    Paint p;
+    public Paint p;
 
     /**
      * Constructor de objetos y power ups
@@ -58,6 +58,7 @@ public class Items {
         this.Px = Px;
         this.imagen = imagen;
         this.altopantalla=altopantalla;
+        this.Py = (altopantalla / 10) * 8;
         p = new Paint();
         p.setColor(Color.TRANSPARENT);
         p.setStyle(Paint.Style.STROKE);

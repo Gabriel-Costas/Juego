@@ -13,11 +13,11 @@ public class Fuente {
     /**
      * Imagen de elementos de la fuente
      */
-    Bitmap fuente;
+    public Bitmap fuente;
     /**
      * Coleccion de imagenes de la fuente con su correspondiente caracter asociado
      */
-    static HashMap<String, Bitmap> letras = new HashMap<>();
+    public static HashMap<String, Bitmap> letras = new HashMap<>();
 
     /**
      * Añade nuevo elemento al hashmap

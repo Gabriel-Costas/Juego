@@ -20,35 +20,35 @@ public class Escena {
     /**
      * Codigo de la escena actual
      */
-    int numEscena=-1;
+    public int numEscena=-1;
     /**
      * Alto de la pantalla
      */
-    int altoPantalla;
+    public int altoPantalla;
     /**
      * Ancho de la pantalla
      */
-    int anchoPantalla;
+    public int anchoPantalla;
     /**
      * Contexto de la aplicación
      */
-    Context context;
+    public Context context;
     /**
      * Dibuja el boton de regreso a la pantalla de menu principal
      */
-    Boton btnHome;
+    public Boton btnHome;
     /**
      * Color de las hitboxes
      */
-    Paint p;
+    public Paint p;
     /**
      * Dibuja hitboxes
      */
-    Rect menu;
+    public Rect menu;
     /**
      * Gestiona la fuente para escritura en la escena
      */
-    Fuente fuente;
+    public Fuente fuente;
 
     /**
      * Constructor de la clase Escena

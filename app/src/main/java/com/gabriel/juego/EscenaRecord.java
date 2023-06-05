@@ -22,64 +22,64 @@ public class EscenaRecord extends Escena {
     /**
      * Alto y ancho de la pantalla
      */
-    int altoPantalla, anchoPantalla;
+    public int altoPantalla, anchoPantalla;
     /**
      * Contexto de la aplicacion
      */
-    Context context;
+    public Context context;
     /**
      * Cadena de nombre para el grabado de record
      */
-    String recordNombre = "";
+    public String recordNombre = "";
     /**
      * Codigo del record
      */
-    int claveRecord;
+    public int claveRecord;
     /**
      * Imagen de fondo de la escena
      */
-    Bitmap fondoMuerte;
+    public Bitmap fondoMuerte;
     /**
      * Imagenes para los botones de la escena
      */
-    Bitmap btnBorrar, btnConfirmar;
+    public Bitmap btnBorrar, btnConfirmar;
     /**
      * Gestiona el fondo de la escena
      */
-    Fondo go;
+    public Fondo go;
     /**
      * Gestiona y dibuja el teclado personalizado
      */
-    Teclado teclado;
+    public Teclado teclado;
     /**
      * Gestor de vibracion
      */
-    Vibrator vibrator;
+    public Vibrator vibrator;
     /**
      * Dibuja los botones de la escena
      */
-    Boton btnBorra, btnConf;
+    public Boton btnBorra, btnConf;
     /**
      * Checkea si se produce un nuevo record
      */
-    Boolean introducirDatos = true;
+    public Boolean introducirDatos = true;
     /**
      * Gestion de grabacion de records con libreria añadida
      */
-    Gson gson;
+    public Gson gson;
     /**
      * Coleccion de nombres de los records
      */
-    ArrayList<String> nombres;
+    public ArrayList<String> nombres;
     /**
      * Coleccion de puntuaciones de los records
      */
-    ArrayList<Integer> puntuaciones;
+    public ArrayList<Integer> puntuaciones;
 
     /**
      * Codigo de la escena
      */
-    int numEscena = 3;
+    public int numEscena = 3;
 
     /**
      *
